@@ -1,11 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const App = (props) => {
+import TetrisDisplayer from './TetrisDisplayer'
+
+export const App = (props) => {
 	return (
 		<div>
-			a que coucou!
+			<span style={{display: "block"}}>Red tetris, le tetris 99 du pécé</span>
+			<TetrisDisplayer />
 		</div>
 	);
 }
 
-export default App
+const mapStateToProps = (state) => {
+	return {};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {}
+};
+
+const AppRedux = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
+
+export default AppRedux;

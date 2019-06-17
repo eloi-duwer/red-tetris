@@ -1,0 +1,15 @@
+.TetrisDisplayer {
+	border: 2px solid black;
+	display: inline-block;
+}
+
+.TetrisRow {
+	height: 20px;
+}
+
+.TetrisCase {
+	width: 18px;
+	height: 18px;
+	border: 1px solid black;
+	display: inline-block;
+}
