@@ -9,7 +9,7 @@ import reducers from './reducers/allReducers'
 
 import { initTetrisState } from './actions/tetrisActions'
 
-const store = createStore(reducers);
+export const store = createStore(reducers);
 
 ReactDom.render(
 	<Provider store={store}>

@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import TetrisDisplayer from './TetrisDisplayer'
+import TetrisController from './TetrisController'
 
 export const App = (props) => {
 	return (
 		<div>
 			<span style={{display: "block"}}>Red tetris, le tetris 99 du pécé</span>
-			<TetrisDisplayer />
+			<TetrisController />
 		</div>
 	);
 }

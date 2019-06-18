@@ -5,15 +5,15 @@ import '../css/TetrisDisplayer.css'
 
 const colorTable = ["white", "black", "skyblue"]
 
-export const TetrisDisplayer = ({tetrisState}) => {
-	console.log(tetrisState)
+export const TetrisDisplayer = (props) => {
+	let {tetrisState} = props;
 	return (
 		<div className="TetrisDisplayer">
 			{tetrisState.map((tetrisRow, index) => {
 				return (
 					<div key={index} className="TetrisRow">
-						{tetrisRow.map((tetrisCase, index) => 
-							<div className="TetrisCase" key={index} style={{color: colorTable[tetrisCase]}}></div>
+						{tetrisRow.map((tetrisCase, index) =>
+							<div className="TetrisCase" key={index} style={{"backgroundColor": colorTable[tetrisCase]}}></div>
 						)}
 					</div>
 				);

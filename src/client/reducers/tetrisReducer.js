@@ -1,7 +1,14 @@
 
-import { INITTETRISSTATE, SETTETRISSTATE } from '../actions/tetrisActions.js'
+import { INITTETRISSTATE, SETTETRISSTATE, STARTSTOPTETRISGAME } from '../actions/tetrisActions.js'
 
-const initialTetrisState = new Array(20).fill(new Array(10).fill(0));
+const width = 10;
+const height = 20;
+const initialTetrisState = new Array(height);
+var i = 0;
+while (i < height) {
+	initialTetrisState[i] = new Array(width).fill(0);
+	++i;
+}
 
 const tetrisReducer = (state = {}, action) => {
 	switch(action.type) {
@@ -15,6 +22,11 @@ const tetrisReducer = (state = {}, action) => {
 				...state,
 				tetrisState: action.newState
 			};
+		case STARTSTOPTETRISGAME:
+			return {
+				...state,
+				tetrisGameStarted: !state.tetrisGameStarted
+			}
 		default:
 			return state;
 	}
