@@ -1,10 +1,10 @@
 {
   "name": "red-tetris",
   "version": "1.0.0",
-  "description": "Projet red-tetris de 42, stack uniquement js",
+  "description": "Projet red-tetris de 42, stack js",
   "main": "index.js",
   "scripts": {
-    "client-dev": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080"
+    "dev": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080"
   },
   "repository": {
     "type": "git",

@@ -1,22 +1,45 @@
-export const INITTETRISSTATE = "INITTETRISSTATE";
-export const SETTETRISSTATE = "SETTETRISSTATE";
-export const STARTSTOPTETRISGAME = "STARTSTOPTETRISGAME";
+export const INITBOARDSTATE = "INITBOARDSTATE";
+export const SETBOARDSTATE = "SETBOARDSTATE";
+export const MOVEPIECE = "MOVEPIECE";
+export const ROTATEPIECE = "ROTATEPIECE";
+export const ADDPIECETOBOARD = "ADDPIECETOBOARD";
+export const NEXTFRAME = "NEXTFRAME";
 
-export const initTetrisState = () => {
+export const initBoardState = () => {
 	return {
-		type: INITTETRISSTATE
+		type: INITBOARDSTATE
 	}
 }
 
-export const setTetrisState = (newState) => {
+export const setBoardState = (newState) => {
 	return {
-		type: SETTETRISSTATE,
+		type: SETBOARDSTATE,
 		newState
 	}
 }
 
-export const startStopTetrisGame = () => {
+export const movePiece = (newPos) => {
 	return {
-		type: STARTSTOPTETRISGAME
+		type: MOVEPIECE,
+		newPos
+	}
+}
+
+export const rotatePiece = direction => {
+	return {
+		type: ROTATEPIECE,
+		direction
+	}
+}
+
+export const addPieceToBoard = () => {
+	return {
+		type: ADDPIECETOBOARD
+	}
+}
+
+export const nextFrame = () => {
+	return {
+		type: NEXTFRAME
 	}
 }

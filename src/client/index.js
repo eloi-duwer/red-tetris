@@ -7,8 +7,6 @@ import App from './containers/app'
 
 import reducers from './reducers/allReducers'
 
-import { initTetrisState } from './actions/tetrisActions'
-
 export const store = createStore(reducers);
 
 ReactDom.render(
@@ -17,5 +15,3 @@ ReactDom.render(
 	</Provider>,
 	document.getElementById('main')
 );
-
-store.dispatch(initTetrisState());

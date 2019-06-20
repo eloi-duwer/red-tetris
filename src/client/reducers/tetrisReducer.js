@@ -1,32 +1,91 @@
 
-import { INITTETRISSTATE, SETTETRISSTATE, STARTSTOPTETRISGAME } from '../actions/tetrisActions.js'
+import {
+	INITBOARDSTATE,
+	SETBOARDSTATE,
+	MOVEPIECE,
+	ROTATEPIECE,
+	ADDPIECETOBOARD,
+	NEXTFRAME
+} from '../actions/tetrisActions.js'
+
+import randomGenerator from '../tetrisLogic/randomGenerator'
+import pieces from '../tetrisLogic/tetrisPieces'
+import { canMovePiece, canRotatePiece } from '../tetrisLogic/moveAndRotationPiece'
+import putPieceIntoBoard from '../tetrisLogic/putPieceIntoBoard'
 
 const width = 10;
-const height = 20;
-const initialTetrisState = new Array(height);
+const height = 30;
+const initialBoardState = new Array(height);
 var i = 0;
 while (i < height) {
-	initialTetrisState[i] = new Array(width).fill(0);
+	initialBoardState[i] = new Array(width).fill(0);
 	++i;
 }
 
 const tetrisReducer = (state = {}, action) => {
 	switch(action.type) {
-		case INITTETRISSTATE:
+		case INITBOARDSTATE:
 			return {
 				...state,
-				tetrisState: initialTetrisState
+				boardState: initialBoardState,
+				piece: null
 			}
-		case SETTETRISSTATE:
+		case SETBOARDSTATE:
 			return {
 				...state,
-				tetrisState: action.newState
+				boardState: action.newState
 			};
-		case STARTSTOPTETRISGAME:
+		case ADDPIECETOBOARD:
+
+			let piece = randomGenerator();
+			let startLocation = {x: 3, y: 10};
+			if (piece === "o")
+				startLocation.x = 4;
+			else if (piece === "i")
+				startLocation.y = 9
 			return {
 				...state,
-				tetrisGameStarted: !state.tetrisGameStarted
+				piece: {
+					pos: startLocation,
+					piece: pieces[piece],
+					type: piece
+				}
 			}
+
+		case MOVEPIECE:
+			let newPos;
+			if (canMovePiece(state.boardState, state.piece.piece, action.newPos))
+				newPos = action.newPos;
+			else
+				newPos = state.piece.pos;
+			return {
+				...state,
+				piece: {
+					...state.piece,
+					pos: newPos,
+				}
+			}
+
+		case NEXTFRAME:
+			let tryPos = {x: state.piece.pos.x, y: state.piece.pos.y + 1};
+			if (canMovePiece(state.boardState, state.piece.piece, tryPos)) {
+				return {
+					...state,
+					piece: {
+						...state.piece,
+						pos: tryPos
+					}
+				}
+			}
+			let newBoard = putPieceIntoBoard(state.boardState, state.piece);
+			return {
+				...state,
+				boardState: newBoard,
+				piece: null
+			}
+
+		case ROTATEPIECE:
+
 		default:
 			return state;
 	}
