@@ -9,9 +9,9 @@ export default function createPiece() {
 	else if (piece === "i")
 		startLocation.y = 9
 	return {
-			pos: startLocation,
-			piece: pieces[piece],
-			type: piece,
-			orientation: 0
+		pos: startLocation,
+		piece: pieces[piece],
+		type: piece,
+		orientation: 0
 	};
 }

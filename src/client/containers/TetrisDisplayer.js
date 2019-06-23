@@ -6,6 +6,8 @@ import pieces from '../tetrisLogic/tetrisPieces'
 import frameControl from '../tetrisLogic/frameControl'
 import keyDownControl from '../tetrisLogic/keyDownControl'
 
+const divRef = React.createRef()
+
 const colorSelecter = (tetrisCase, piecePlaces, i, j) => {
 	if (tetrisCase !== 0)
 		return tetrisCase;
@@ -39,13 +41,15 @@ export const TetrisDisplayer = ({boardState, tetrisPiece, ...props}) => {
 		})
 	}
 
+	let height = divRef.current ? divRef.current.offsetHeight : null
+
 	return (
-		<div tabIndex="0" style={{/*height: '100%',*/ border: '2px solid black', display: 'inline-block'}}>
+		<div ref={divRef} tabIndex="0" style={{height: '100%', width: height ? height / 2 : undefined, border: '2px solid black', display: 'inline-block'}}>
 			{boardState.slice(10).map((tetrisRow, i) => {
 				return (
-					<div key={i} style={{height: '20px'}}>
+					<div key={i} style={{height: '5%'}}>
 						{tetrisRow.map((tetrisCase, j) =>
-							<div key={j} style={{"backgroundColor": colorSelecter(tetrisCase, piecePlaceToPaint, i, j), width: '20px', height: '20px', display: 'inline-block'}}></div>
+							<div key={j} style={{"backgroundColor": colorSelecter(tetrisCase, piecePlaceToPaint, i, j), width: '10%', height: '100%', display: 'inline-block'}}></div>
 						)}
 					</div>
 				);
