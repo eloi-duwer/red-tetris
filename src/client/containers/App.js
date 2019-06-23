@@ -5,7 +5,7 @@ import TetrisController from './TetrisController'
 
 export const App = (props) => {
 	return (
-		<div>
+		<div style={{display: 'absolute', top: 0, height: '100vh', left: 0, width: '100vw'}}>
 			<span style={{display: "block"}}>Red tetris, le tetris 99 du pécé</span>
 			<TetrisController />
 		</div>

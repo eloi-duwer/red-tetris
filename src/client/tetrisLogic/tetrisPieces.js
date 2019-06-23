@@ -64,13 +64,13 @@ const pieces = {
 			[0,0,0]],
 
 	colors: {
-		i: "cyan",
-		o: "yellow",
-		t: "purple",
-		s: "green",
-		z: "red",
-		j: "blue",
-		l: "orange"
+		i: "rgb(60, 199, 214)", //cyan
+		o: "rgb(251, 180, 20)", // yellow
+		t: "rgb(176, 68, 151)", //purple
+		s: "rgb(149, 196, 61)", //green
+		z: "rgb(232, 65, 56)", //red
+		j: "rgb(57, 147, 208)", //blue
+		l: "rgb(237, 101, 47)" //orange
 	}
 }
 

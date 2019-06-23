@@ -2,7 +2,6 @@ export const INITBOARDSTATE = "INITBOARDSTATE";
 export const SETBOARDSTATE = "SETBOARDSTATE";
 export const MOVEPIECE = "MOVEPIECE";
 export const ROTATEPIECE = "ROTATEPIECE";
-export const ADDPIECETOBOARD = "ADDPIECETOBOARD";
 export const NEXTFRAME = "NEXTFRAME";
 
 export const initBoardState = () => {
@@ -29,12 +28,6 @@ export const rotatePiece = direction => {
 	return {
 		type: ROTATEPIECE,
 		direction
-	}
-}
-
-export const addPieceToBoard = () => {
-	return {
-		type: ADDPIECETOBOARD
 	}
 }
 

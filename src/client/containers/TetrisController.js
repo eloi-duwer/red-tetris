@@ -7,7 +7,7 @@ const TetrisController = ({tetrisGameStarted}) => {
 	const [gameStarted, setGameStarted] = useState(false);
 
 	return (
-		<div>
+		<div style={{height: '100%'}}>
 			<button style={{display: "block"}} onClick={() => setGameStarted(!gameStarted)}>Cliquez pour {gameStarted ? "arrêter" : "commencer"} le tetris</button>
 			{gameStarted
 				? <TetrisDisplayer />
