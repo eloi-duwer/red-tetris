@@ -14,7 +14,12 @@ import checkTetris from '../tetrisLogic/checkTetris'
 
 const width = 10;
 const height = 30;
-const initialBoardState = new Array(height).fill().map(a => new Array(width).fill(0));
+//const initialBoardState = new Array(height).fill().map(a => new Array(width).fill(0));
+//DEBUG
+let initialBoardState = new Array(height - 4).fill().map(a => new Array(width).fill(0));
+initialBoardState = initialBoardState.concat(new Array(4).fill().map((a, i) => new Array(width).fill(i % 2 ? "black" : "grey")));
+
+console.log(initialBoardState);
 
 const tetrisReducer = (state = {}, action) => {
 	switch(action.type) {

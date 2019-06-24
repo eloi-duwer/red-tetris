@@ -1,22 +1,12 @@
 const checkTetris = (board) => {
 
-	return board.reduce((acc, useless, index) => {
+	const allTetrisLines = board.reduce((acc, line, index) => {
+		return line.indexOf(0) === -1 ? [...acc, index] : acc;
+	}, []);
 
-		let i = board.length - 1 - index - acc.offset,
-			ligne = i > 0 ? board[i] : new Array(10).fill(0),
-			isTetris = ligne.indexOf(0) === -1 ? true : false;
+	const filtered = board.filter((useless, i) => allTetrisLines.indexOf(i) === -1 ? true: false);
 
-		if (isTetris)
-			return {
-				board: (i - 1 > 0 ? board[i - 1] : new Array(10).fill(0)).concat(acc.board),
-				offset: acc.offset + 1
-			}
-
-		return {
-			board: [ligne].concat(acc.board),
-			offset: acc.offset + 1
-		}
-	}, {board: [], offset: 0}).board;
+	return [...(new Array(allTetrisLines.length).fill().map(a => new Array(10).fill(0))), ...filtered];
 }
 
 export default checkTetris;

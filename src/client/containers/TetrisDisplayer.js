@@ -24,6 +24,7 @@ export const TetrisDisplayer = ({boardState, tetrisPiece, ...props}) => {
 		props.initBoardState();
 		let idInterval = setInterval(frameControl, 750);
 		document.body.addEventListener("keydown", keyDownControl);
+		divRef.current.focus();
 
 		return () => {
 			clearInterval(idInterval);

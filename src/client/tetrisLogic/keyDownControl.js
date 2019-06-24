@@ -4,7 +4,6 @@ import { store } from '../index'
 import { movePiece, rotatePiece } from '../actions/tetrisActions'
 
 const keyDownControl = event => {
-	event.preventDefault(); //Empêcher l'effet par défaut (space appuie sur le bouton cliqué par ex)
 	let { pos } = store.getState().tetrisReducer.piece || {};
 	if (!pos) //Pas de piece a controller...
 		return;
