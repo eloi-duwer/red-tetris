@@ -5,6 +5,7 @@ import pieces from '../tetrisLogic/tetrisPieces'
 
 import frameControl from '../tetrisLogic/frameControl'
 import keyDownControl from '../tetrisLogic/keyDownControl'
+import ghostPiecePos from '../tetrisLogic/ghostPiecePos'
 
 const divRef = React.createRef()
 
@@ -15,6 +16,31 @@ const colorSelecter = (tetrisCase, piecePlaces, i, j) => {
 	if (place)
 		return place.color;
 	return "white";
+}
+
+const getPiecesPlacesToPaint = (board, piece, pos) => {
+	if (piece === emptyObj) return [];
+	let actualPieces = doIt(piece.piece, piece.pos, pieces.colors[piece.type]);
+	let bottomPos = ghostPiecePos(board, piece);
+	if (!bottomPos) return actualPieces;
+
+	return [
+		...actualPieces,
+		...doIt(piece.piece, bottomPos, "lightgrey"),
+	];
+
+	function doIt(piece, pos, color) {
+		let pieces = piece.map((row, i) => {
+			return row.map((piece, j) => {
+				if (piece !== 0)
+					return {x: pos.x + j, y: pos.y + i - 10, color: color};
+			}).filter(e => e !== undefined);
+		}).filter(e => e.length > 0)
+		.reduce((acc, val) => {
+			return [...acc, ...val];
+		}, []);
+		return pieces;
+	}
 }
 
 export const TetrisDisplayer = ({boardState, tetrisPiece, ...props}) => {
@@ -32,15 +58,7 @@ export const TetrisDisplayer = ({boardState, tetrisPiece, ...props}) => {
 		}
 	}, [])
 
-	let piecePlaceToPaint = [];
-	if (tetrisPiece !== emptyObj) { //Convertit la piece actuelle en une liste de positions sur la grille
-		tetrisPiece.piece.forEach((row, i) => {
-			row.forEach((piece, j) => {
-				if (piece !== 0)
-					piecePlaceToPaint.push({x: tetrisPiece.pos.x + j, y: tetrisPiece.pos.y + i - 10, color: pieces.colors[tetrisPiece.type]});
-			})
-		})
-	}
+	let piecePlaceToPaint = getPiecesPlacesToPaint(boardState, tetrisPiece);
 
 	let height = divRef.current ? divRef.current.offsetHeight : null
 
@@ -50,7 +68,7 @@ export const TetrisDisplayer = ({boardState, tetrisPiece, ...props}) => {
 				return (
 					<div key={i} style={{height: '5%'}}>
 						{tetrisRow.map((tetrisCase, j) =>
-							<div key={j} style={{"backgroundColor": colorSelecter(tetrisCase, piecePlaceToPaint, i, j), width: '10%', height: '100%', display: 'inline-block'}}></div>
+							<div key={j} style={{"backgroundColor": colorSelecter(tetrisCase, piecePlaceToPaint, i, j), width: '10%', height: '100%', display: 'inline-block', "borderRadius": "30%"}}></div>
 						)}
 					</div>
 				);
@@ -65,7 +83,7 @@ const emptyObj = {};
 const mapStateToProps = (state) => {
 	return {
 		boardState: state.tetrisReducer.boardState || emptyArray,
-		tetrisPiece: state.tetrisReducer.piece || emptyObj
+		tetrisPiece: state.tetrisReducer.piece || emptyObj,
 	};
 };
 

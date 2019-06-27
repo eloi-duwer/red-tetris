@@ -6,7 +6,10 @@ const checkTetris = (board) => {
 
 	const filtered = board.filter((useless, i) => allTetrisLines.indexOf(i) === -1 ? true: false);
 
-	return [...(new Array(allTetrisLines.length).fill().map(a => new Array(10).fill(0))), ...filtered];
+	return {
+		newBoard: [...(new Array(allTetrisLines.length).fill().map(a => new Array(10).fill(0))), ...filtered],
+		nbPoints: 30 - filtered.length
+	};
 }
 
 export default checkTetris;

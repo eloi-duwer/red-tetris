@@ -2,9 +2,13 @@
 
 import { store } from '../index'
 import { movePiece, rotatePiece } from '../actions/tetrisActions'
+import ghostPiecePos from './ghostPiecePos'
 
 const keyDownControl = event => {
-	let { pos } = store.getState().tetrisReducer.piece || {};
+	let { tetrisReducer } = store.getState();
+	let { pos } = tetrisReducer.piece || {},
+		{ boardState } = tetrisReducer,
+		{ piece } = tetrisReducer;
 	if (!pos) //Pas de piece a controller...
 		return;
 	switch (event.code) { //code = touche sur un clavier équivalent QWERTY, key = touche vraiment appuyée
@@ -26,6 +30,10 @@ const keyDownControl = event => {
 			store.dispatch(movePiece({x: pos.x + 1, y: pos.y}));
 			break;
 		case "Space": //hard drop
+			let bottomPos = ghostPiecePos(boardState, piece);
+			if (!bottomPos)
+				return;
+			store.dispatch(movePiece(bottomPos));
 			break;
 		default:
 			break;

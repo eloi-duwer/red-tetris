@@ -1,4 +1,3 @@
-
 import {
 	INITBOARDSTATE,
 	MOVEPIECE,
@@ -14,12 +13,7 @@ import checkTetris from '../tetrisLogic/checkTetris'
 
 const width = 10;
 const height = 30;
-//const initialBoardState = new Array(height).fill().map(a => new Array(width).fill(0));
-//DEBUG
-let initialBoardState = new Array(height - 4).fill().map(a => new Array(width).fill(0));
-initialBoardState = initialBoardState.concat(new Array(4).fill().map((a, i) => new Array(width).fill(i % 2 ? "black" : "grey")));
-
-console.log(initialBoardState);
+const initialBoardState = new Array(height).fill().map(a => new Array(width).fill(0));
 
 const tetrisReducer = (state = {}, action) => {
 	switch(action.type) {
@@ -27,7 +21,8 @@ const tetrisReducer = (state = {}, action) => {
 			return {
 				...state,
 				boardState: initialBoardState,
-				piece: createPiece()
+				piece: createPiece(),
+				points: 0,
 			};
 
 		case NEXTFRAME: {
@@ -42,13 +37,14 @@ const tetrisReducer = (state = {}, action) => {
 				}
 			}
 
-			let newBoard = checkTetris(putPieceIntoBoard(state.boardState, state.piece)),
+			let {newBoard, nbPoints} = checkTetris(putPieceIntoBoard(state.boardState, state.piece)),
 				newPiece = createPiece();
 
 			return {
 				...state,
 				boardState: newBoard,
-				piece: newPiece //Vérifier qu'on peut la poser, si on peut pas = game over
+				piece: newPiece, //Vérifier qu'on peut la poser, si on peut pas = game over
+				points: state.points + calcPoints(nbPoints)
 			};
 		}
 		case MOVEPIECE:
@@ -78,6 +74,21 @@ const tetrisReducer = (state = {}, action) => {
 		}
 		default:
 			return state;
+	}
+}
+
+function calcPoints(nb) {
+	switch(nb) {
+		case 0:
+			return 0;
+		case 1:
+			return 40;
+		case 2:
+			return 100;
+		case 3:
+			return 300;
+		case 4:
+			return 1200;
 	}
 }
 
