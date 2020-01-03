@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   putPieceIntoBoard.js                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/03 15:20:26 by eduwer            #+#    #+#             */
+/*   Updated: 2020/01/03 15:20:27 by eduwer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 import pieces from './tetrisPieces'
 
 export default function putPieceIntoBoard(board, piece) {

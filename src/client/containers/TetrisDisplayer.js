@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   TetrisDisplayer.js                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
+/*   Updated: 2020/01/03 15:21:20 by eduwer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { initBoardState } from '../actions/tetrisActions'

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wallKickData.js                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/03 15:20:46 by eduwer            #+#    #+#             */
+/*   Updated: 2020/01/03 15:20:47 by eduwer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 Données tirées de https://tetris.fandom.com/wiki/SRS
 Les coords y sont inversées par rapport a la page (pas la mm représentation interne)

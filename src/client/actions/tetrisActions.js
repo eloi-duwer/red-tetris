@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tetrisActions.js                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/03 15:21:38 by eduwer            #+#    #+#             */
+/*   Updated: 2020/01/03 15:21:38 by eduwer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 export const INITBOARDSTATE = "INITBOARDSTATE";
 export const MOVEPIECE = "MOVEPIECE";
 export const ROTATEPIECE = "ROTATEPIECE";

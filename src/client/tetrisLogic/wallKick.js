@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wallKick.js                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/03 15:20:41 by eduwer            #+#    #+#             */
+/*   Updated: 2020/01/03 15:20:42 by eduwer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 import wallKickData from './wallKickData'
 import { canMovePiece } from './moveAndRotationPiece'
 
@@ -9,7 +21,7 @@ export default function wallKick(board, oldPieceData, newPiece, newOrientation) 
 			orientation: newOrientation
 		};
 
-	let tests = oldPieceData.type === 'i' 
+	let tests = oldPieceData.type === 'i'
 		? wallKickData.i[oldPieceData.orientation][newOrientation]
 		: wallKickData.all[oldPieceData.orientation][newOrientation];
 
