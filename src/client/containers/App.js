@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:32 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 15:21:34 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/03 18:13:48 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ export const App = (props) => {
 	);
 }
 
+
+
 const mapStateToProps = (state) => {
+	console.log(state);
 	return {};
 };
 

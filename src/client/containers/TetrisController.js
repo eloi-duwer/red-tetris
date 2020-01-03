@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 15:21:28 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/03 17:32:06 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ const TetrisController = ({tetrisGameStarted, points}) => {
 	const [gameStarted, setGameStarted] = useState(false);
 
 	return (
-		<div style={{height: '80%'}}>
+		<div style={{height: '80%', display: "flex", "flexDirection": "column", "alignItems": "flex-start"}}>
 			<button style={{display: "block"}} onClick={() => setGameStarted(!gameStarted)}>Cliquez pour {gameStarted ? "arrêter" : "commencer"} le tetris</button>
 			{gameStarted
 				? <>
