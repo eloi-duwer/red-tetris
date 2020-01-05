@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:48:33 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 04:56:36 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 16:59:03 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ const socketReducer = (state = {}, action) => {
           ...state.playersInfo,
           [action.newPlayerInfo.id]: {
             ...state.playersInfo[action.newPlayerInfo.id],
-            ...action.newPlayerInfo[action.newPlayerInfo.id]
+            ...action.newPlayerInfo
           },
         }
       }

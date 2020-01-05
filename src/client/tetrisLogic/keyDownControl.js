@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:09 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 15:20:10 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 17:41:01 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ import { movePiece, rotatePiece } from '../actions/tetrisActions'
 import ghostPiecePos from './ghostPiecePos'
 
 const keyDownControl = event => {
+	event.stopPropagation();
 	let { tetrisReducer } = store.getState();
 	let { pos } = tetrisReducer.piece || {},
 		{ boardState } = tetrisReducer,

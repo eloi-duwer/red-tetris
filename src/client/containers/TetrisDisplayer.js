@@ -6,17 +6,14 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 04:30:25 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 18:28:22 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { initBoardState } from '../actions/tetrisActions'
 import pieces from '../tetrisLogic/tetrisPieces'
 
-import frameControl from '../tetrisLogic/frameControl'
-import keyDownControl from '../tetrisLogic/keyDownControl'
 import ghostPiecePos from '../tetrisLogic/ghostPiecePos'
 
 const divRef = React.createRef()
@@ -55,26 +52,23 @@ const getPiecesPlacesToPaint = (board, piece, pos) => {
 	}
 }
 
-export const TetrisDisplayer = ({boardState, tetrisPiece, ...props}) => {
-
-	useEffect(() => {
-
-		props.initBoardState();
-		let idInterval = setInterval(frameControl, 750);
-		document.body.addEventListener("keydown", keyDownControl);
-		divRef.current.focus();
-
-		return () => {
-			clearInterval(idInterval);
-			document.body.removeEventListener("keydown", keyDownControl);
-		}
-	}, [])
+export const TetrisDisplayer = ({boardState, tetrisPiece, size, ...props}) => {
 
 	let piecePlaceToPaint = getPiecesPlacesToPaint(boardState, tetrisPiece);
 
-	let height = divRef.current ? divRef.current.offsetHeight : null
+	return (<div style={{width: (size * 10) + 'px', height: (size * 20) + 'px', display: "flex", flexWrap: "wrap", border: '2px solid black', margin: '10px', borderRadius: '5px'}}>
+		{boardState.slice(10).map((tetrisRow, i) => tetrisRow.map((tetrisCase, j) => <div key={'' + i + j} style={{
+				backgroundColor: colorSelecter(tetrisCase, piecePlaceToPaint, i, j),
+				height: size + 'px',
+				flexBasis: '10%',
+				borderRadius: '30%'}}>
+			</div>
+		))}
+	</div>);
 
-	return (
+	//let height = divRef.current ? divRef.current.offsetHeight : null
+
+	/*return (
 		<div ref={divRef} tabIndex="0" style={{width: height ? height / 2 : undefined, border: '2px solid black', display: 'inline-block', marginLeft: "10px", marginRight: "10px"}}>
 			{boardState.slice(10).map((tetrisRow, i) => {
 				return (
@@ -86,23 +80,26 @@ export const TetrisDisplayer = ({boardState, tetrisPiece, ...props}) => {
 				);
 			})}
 		</div>
-	);
+	);*/
 }
 
 const emptyArray = [];
 const emptyObj = {};
 
-const mapStateToProps = (state) => {
-	return {
+const mapStateToProps = (state, props) => {
+	return props.id
+	? ({
+		boardState: ((state.socketReducer.playersInfo || {})[props.id] || {}).boardState || emptyArray,
+		tetrisPiece: ((state.socketReducer.playersInfo || {})[props.id] || {}).piece || emptyObj
+	})
+	: ({
 		boardState: state.tetrisReducer.boardState || emptyArray,
 		tetrisPiece: state.tetrisReducer.piece || emptyObj,
-	};
+	});
 };
 
 const mapDispatchToProps = dispatch => {
-	return {
-		initBoardState: () => dispatch(initBoardState()),
-	}
+	return {}
 };
 
 const TetrisDisplayerRedux = connect(

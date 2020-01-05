@@ -1,9 +1,25 @@
-import React from 'react'
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   GameStarter.js                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/05 00:42:23 by eduwer            #+#    #+#             */
+/*   Updated: 2020/01/05 17:44:14 by eduwer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+import React, {useRef} from 'react'
 import { connect } from 'react-redux'
 
 export const GameStarter = (props) => {
 
+	const buttonRef = useRef();
+
 	const startGame = () => {
+		if (buttonRef.current)
+			buttonRef.current.blur();
 		props.socket.emit('startGame');
 	}
 
@@ -16,7 +32,7 @@ export const GameStarter = (props) => {
 			{props.gameAdmin
 				? <div>
 					<button
-						onClick={props.gameStarted ? stopGame : startGame}
+						ref={buttonRef} onClick={props.gameStarted ? stopGame : startGame }
 					>{props.gameStarted ? "Arrêter" : "Commencer"} la partie</button>
 				</div>
 				: <div>

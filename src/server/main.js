@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:35:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 04:44:13 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 16:49:21 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ io.on('connection', socket => {
 	});
 
 	socket.on('updatePlayer', newPlayer => {
-		socket.to(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
+		if (!player.joinedGame)
+			return
+		io.in(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
+		//socket.to(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
 	})
 
 });

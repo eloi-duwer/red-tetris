@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:19:48 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 03:46:11 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 17:54:58 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ const frameControl = () => {
 		points = state.tetrisReducer.points,
 		socket = state.socketReducer.socket;
 
-		socket.emit('updatePlayer', {points});
+		socket.emit('updatePlayer', {
+			points: state.tetrisReducer.points,
+			boardState: state.tetrisReducer.boardState,
+			piece: state.tetrisReducer.piece
+		});
 }
 
 export default frameControl;

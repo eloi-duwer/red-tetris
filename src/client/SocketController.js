@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 18:07:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 04:51:46 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 18:35:32 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ import {
 } from './actions/socketActions'
 
 export default reduxStore => {
-  const socket = socketIOClient("http://127.0.0.1:8081");
+  const socket = socketIOClient("http://192.168.1.69:8081");
 	
   reduxStore.dispatch(setSocket(socket));
 
