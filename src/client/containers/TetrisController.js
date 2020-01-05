@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 17:32:06 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 04:25:52 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@ import React, { useState } from 'react'
 import {connect} from 'react-redux'
 
 import TetrisDisplayer from './TetrisDisplayer'
+import GameStarter from './GameStarter'
+import OtherPlayersDisplayer from './OtherPlayersDisplayer'
 
-const TetrisController = ({tetrisGameStarted, points}) => {
-
-	const [gameStarted, setGameStarted] = useState(false);
+const TetrisController = ({gameStarted, points}) => {
 
 	return (
 		<div style={{height: '80%', display: "flex", "flexDirection": "column", "alignItems": "flex-start"}}>
-			<button style={{display: "block"}} onClick={() => setGameStarted(!gameStarted)}>Cliquez pour {gameStarted ? "arrêter" : "commencer"} le tetris</button>
+			<GameStarter />
 			{gameStarted
-				? <>
+				? <div>
 						<div>Vous avez {points} points</div>
-						<TetrisDisplayer />
-					</>
+						<div style={{display: 'flex'}}>
+							<TetrisDisplayer />
+							<OtherPlayersDisplayer />
+						</div>
+					</div>
 				: undefined
 			}
 		</div>
@@ -40,6 +43,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = (state, props) => {
 	return {
 		points: state.tetrisReducer.points || 0,
+		gameStarted: !!(state.socketReducer || {}).gameStarted,
 	};
 };
 

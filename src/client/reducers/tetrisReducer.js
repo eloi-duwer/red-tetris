@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:08 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 15:21:08 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 03:35:26 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,23 @@ const tetrisReducer = (state = {}, action) => {
 			}
 
 			let {newBoard, nbPoints} = checkTetris(putPieceIntoBoard(state.boardState, state.piece)),
-				newPiece = createPiece();
+				newPiece = createPiece(),
+				pointsToAdd = calcPoints(nbPoints);
 
 			return {
 				...state,
 				boardState: newBoard,
 				piece: newPiece, //Vérifier qu'on peut la poser, si on peut pas = game over
-				points: state.points + calcPoints(nbPoints)
+				points: state.points + pointsToAdd,
 			};
 		}
+
 		case MOVEPIECE:
 			let newPos;
 			if (canMovePiece(state.boardState, state.piece.piece, action.newPos))
 				newPos = action.newPos;
 			else
-				newPos = state.piece.pos;
+				return state;
 			return {
 				...state,
 				piece: {

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 15:21:20 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 04:30:25 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ export const TetrisDisplayer = ({boardState, tetrisPiece, ...props}) => {
 	let height = divRef.current ? divRef.current.offsetHeight : null
 
 	return (
-		<div ref={divRef} tabIndex="0" style={{height: '100%', width: height ? height / 2 : undefined, border: '2px solid black', display: 'inline-block'}}>
+		<div ref={divRef} tabIndex="0" style={{width: height ? height / 2 : undefined, border: '2px solid black', display: 'inline-block', marginLeft: "10px", marginRight: "10px"}}>
 			{boardState.slice(10).map((tetrisRow, i) => {
 				return (
 					<div key={i} style={{height: '5%'}}>

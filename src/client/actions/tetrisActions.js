@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:38 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 15:21:38 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/05 01:33:56 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ export const initBoardState = () => {
 	}
 }
 
-export const movePiece = (newPos) => {
+export const movePiece = newPos => {
 	return {
 		type: MOVEPIECE,
 		newPos
