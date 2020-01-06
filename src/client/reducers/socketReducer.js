@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:48:33 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 16:59:03 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 16:15:11 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ import {
   SETGAMESTARTED,
   SETPLAYERSINFO,
   UPDATEPLAYERINFO,
+  ADDBAGOFPIECES,
+  REMOVEFIRSTPIECE
 } from '../actions/socketActions.js'
 
 const socketReducer = (state = {}, action) => {
@@ -48,7 +50,7 @@ const socketReducer = (state = {}, action) => {
     case SETGAMESTARTED:
       return {
         ...state,
-        gameStarted: action.gameStarted
+        gameStarted: action.gameStarted,
       }
 
     case SETPLAYERSINFO:

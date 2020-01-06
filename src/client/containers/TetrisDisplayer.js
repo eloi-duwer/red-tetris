@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 18:28:22 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 13:39:34 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,25 @@ const getPiecesPlacesToPaint = (board, piece, pos) => {
 	}
 }
 
+const GameOverOverlay = ({points, ownPlayer, pseudo = "Unknown"}) => <div style={{
+	position: ' absolute',
+	height: ' 100%',
+	width: ' 100%',
+	backgroundColor: ' rgba(200, 200, 200, 0.5)',
+	display: 'flex',
+	textAlign: 'center',
+	justifyContent: 'center',
+	alignItems: 'center',
+}}>
+	<div>{ownPlayer ? "Vous avez " : `Le joueur ${pseudo} a `} perdu! Score final: {points} points</div>
+</div>;
+
 export const TetrisDisplayer = ({boardState, tetrisPiece, size, ...props}) => {
 
 	let piecePlaceToPaint = getPiecesPlacesToPaint(boardState, tetrisPiece);
 
-	return (<div style={{width: (size * 10) + 'px', height: (size * 20) + 'px', display: "flex", flexWrap: "wrap", border: '2px solid black', margin: '10px', borderRadius: '5px'}}>
+	return (<div style={{width: (size * 10) + 'px', height: (size * 20) + 'px', display: "flex", flexWrap: "wrap", border: '2px solid black', margin: '10px', borderRadius: '5px', position: ' relative'}}>
+		{props.gameOver ? <GameOverOverlay points={props.points} ownPlayer={props.ownPlayer} pseudo={props.pseudo}/> : undefined}
 		{boardState.slice(10).map((tetrisRow, i) => tetrisRow.map((tetrisCase, j) => <div key={'' + i + j} style={{
 				backgroundColor: colorSelecter(tetrisCase, piecePlaceToPaint, i, j),
 				height: size + 'px',
@@ -65,37 +79,28 @@ export const TetrisDisplayer = ({boardState, tetrisPiece, size, ...props}) => {
 			</div>
 		))}
 	</div>);
-
-	//let height = divRef.current ? divRef.current.offsetHeight : null
-
-	/*return (
-		<div ref={divRef} tabIndex="0" style={{width: height ? height / 2 : undefined, border: '2px solid black', display: 'inline-block', marginLeft: "10px", marginRight: "10px"}}>
-			{boardState.slice(10).map((tetrisRow, i) => {
-				return (
-					<div key={i} style={{height: '5%'}}>
-						{tetrisRow.map((tetrisCase, j) =>
-							<div key={j} style={{"backgroundColor": colorSelecter(tetrisCase, piecePlaceToPaint, i, j), width: '10%', height: '100%', display: 'inline-block', "borderRadius": "30%"}}></div>
-						)}
-					</div>
-				);
-			})}
-		</div>
-	);*/
 }
 
 const emptyArray = [];
 const emptyObj = {};
 
 const mapStateToProps = (state, props) => {
-	return props.id
-	? ({
-		boardState: ((state.socketReducer.playersInfo || {})[props.id] || {}).boardState || emptyArray,
-		tetrisPiece: ((state.socketReducer.playersInfo || {})[props.id] || {}).piece || emptyObj
-	})
-	: ({
-		boardState: state.tetrisReducer.boardState || emptyArray,
-		tetrisPiece: state.tetrisReducer.piece || emptyObj,
-	});
+	if (props.ownPlayer) {
+		return {
+			boardState: state.tetrisReducer.boardState || emptyArray,
+			tetrisPiece: state.tetrisReducer.piece || emptyObj,
+			gameOver: state.tetrisReducer.gameOver || false,
+			points: state.tetrisReducer.points,
+		};
+	}
+	const playerInfo = (state.socketReducer.playersInfo || {})[props.id] || {};
+	return {
+		boardState: playerInfo.boardState || emptyArray,
+		tetrisPiece: playerInfo.piece || emptyObj,
+		gameOver: playerInfo.gameOver || false,
+		points: playerInfo.points,
+		pseudo: playerInfo.pseudo,
+	};
 };
 
 const mapDispatchToProps = dispatch => {

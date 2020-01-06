@@ -6,16 +6,18 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:15:27 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 01:26:54 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 15:14:49 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 class Game {
-  constructor(id, name, player) {
+  constructor(id, name, player, randomPieceGenerator) {
     this.id = id;
     this.name = name;
     this.creator = player;
     this.playerList = [];
     this.gameStarted = false;
+    this.randomPieceGenerator = randomPieceGenerator
   }
 
   toSend(player) {
@@ -45,9 +47,9 @@ class GameGenerator {
     this.id = 0;
   }
 
-  createGame(player, name = 'new game') {
+  createGame(player, name, randomPieceGenerator) {
     this.id++;
-    return new Game(this.id, name, player);
+    return new Game(this.id, name, player, randomPieceGenerator);
   }
 }
 

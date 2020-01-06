@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 04:17:55 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 18:29:15 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 12:22:58 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ import TetrisDisplayer from './TetrisDisplayer'
 
 export const OtherPlayersDisplayer = (props) => {
 	return (
-		<div className='OtherPlayersDisplayer' style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+		<div className='OtherPlayersDisplayer' style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: "flex-start"}}>
 			{Object.keys(props.playersInfo).map((id, i) => {
 			/*if (+id === +props.ownId)
 				return undefined;*/

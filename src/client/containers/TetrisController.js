@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 18:17:00 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 13:43:53 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,30 @@ const TetrisController = ({gameStarted, points, ...props}) => {
 
 	const [intervalFunc, saveIntervalFunc] = useState(null);
 
+	const stopGame = () => {
+		if (intervalFunc) {
+			clearInterval(intervalFunc);
+			saveIntervalFunc(null);
+			document.body.removeEventListener("keydown", keyDownControl);
+		}
+	}
+
 	useEffect(() => {
 		if (gameStarted) {
 			props.initBoardState();
 			saveIntervalFunc(setInterval(frameControl, 750));
 			document.body.addEventListener("keydown", keyDownControl);
+		} else {
+			stopGame();
 		}
-		else if (intervalFunc) {
-			clearInterval(intervalFunc);
-			document.body.removeEventListener("keydown", keyDownControl);
+	}, [gameStarted]);
+
+	useEffect(() => {
+		if (intervalFunc && props.gameOver) {
+			stopGame();
+			props.socket.emit('gameOver', points);
 		}
-	}, [gameStarted])
+	}, [props.gameOver, gameStarted])
 
 	return (
 		<div style={{height: '80%', display: "flex", "flexDirection": "column", "alignItems": "flex-start"}}>
@@ -44,7 +57,7 @@ const TetrisController = ({gameStarted, points, ...props}) => {
 				? <div>
 						<div>Vous avez {points} points</div>
 						<div style={{display: 'flex'}}>
-							<TetrisDisplayer size={20}/>
+							<TetrisDisplayer size={25} ownPlayer/>
 							<OtherPlayersDisplayer />
 						</div>
 					</div>
@@ -63,7 +76,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = (state, props) => {
 	return {
 		points: state.tetrisReducer.points || 0,
-		gameStarted: !!(state.socketReducer || {}).gameStarted,
+		gameStarted: !!state.socketReducer.gameStarted,
+		gameOver: state.tetrisReducer.gameOver || false,
+		socket: state.socketReducer.socket,
 	};
 };
 

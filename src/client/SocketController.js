@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 18:07:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 18:35:32 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 16:36:54 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@ import {
 	setGame,
 	setGameStarted,
 	setPlayersInfo,
-	updatePlayerInfo
+	updatePlayerInfo,
 } from './actions/socketActions'
 
+import {
+	addBagOfPieces,
+	resetBagOfPieces,
+} from './actions/tetrisActions'
+
 export default reduxStore => {
-  const socket = socketIOClient("http://192.168.1.69:8081");
-	
+  const socket = socketIOClient(":8081");
+
   reduxStore.dispatch(setSocket(socket));
 
   socket.on('setId', id => reduxStore.dispatch(setId(id)))
@@ -39,6 +44,7 @@ export default reduxStore => {
 
 	socket.on('startGame', (startGameInfos) => {
 		reduxStore.dispatch(setPlayersInfo(startGameInfos.listOfPlayers));
+		reduxStore.dispatch(resetBagOfPieces(startGameInfos.firstBag));
 		reduxStore.dispatch(setGameStarted(true));
 	});
 
@@ -49,4 +55,8 @@ export default reduxStore => {
 	socket.on('updatePlayer', newPlayerInfo => {
 		reduxStore.dispatch(updatePlayerInfo(newPlayerInfo));
 	});
+
+	socket.on('nextBag', nextBag => {
+		reduxStore.dispatch(addBagOfPieces(nextBag));
+	})
 }

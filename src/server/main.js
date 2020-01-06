@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:35:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 16:49:21 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 16:31:26 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ const io = require('socket.io')(app);
 
 const playerGenerator = require(__dirname + '/classes/Player.js');
 const gameGenerator = require(__dirname + '/classes/Game.js');
-
+const RandomPieceGenerator = require(__dirname + '/classes/RandomPieceGenerator.js');
 
 let games = [];
 
@@ -27,7 +27,7 @@ io.on('connection', socket => {
 	socket.emit('setId', player.id);
 
 	socket.on('createGame', (name) => {
-		let game = gameGenerator.createGame(player, name);
+		let game = gameGenerator.createGame(player, name || 'new game', new RandomPieceGenerator());
 		console.log(`new Game ${game.id}`);
 		games.push(game);
 		socket.broadcast.emit('gameList', games.map(g => g.toSend(player)));
@@ -59,11 +59,13 @@ io.on('connection', socket => {
 	socket.on('startGame', () => {
 		if (!player.joinedGame)
 			return;
+		let firstBag = player.joinedGame.randomPieceGenerator.resetBeforeStart();
 		player.joinedGame.gameStarted = true;
 		io.in(player.joinedGame.id).emit('startGame', {
 			listOfPlayers: player.joinedGame.playerList
 				.map(p => p.toSend())
-				.reduce((acc, val) => ({...acc, [val.id]: val}), {})
+				.reduce((acc, val) => ({...acc, [val.id]: val}), {}),
+				firstBag: firstBag.toSend(),
 		});
 	});
 
@@ -79,7 +81,18 @@ io.on('connection', socket => {
 			return
 		io.in(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
 		//socket.to(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
-	})
+	});
+
+	socket.on('gameOver', finalPoints => {
+		io.in(player.joinedGame.id).emit('updatePlayer', {id: player.id, gameOver: true, points: finalPoints});
+		console.log(`${player.pseudo} a fini sa partie avec ${finalPoints} points`);
+	});
+
+	socket.on('getNextBag', () => {
+		if (!player.joinedGame)
+			return;
+		socket.emit('nextBag', player.joinedGame.randomPieceGenerator.getNextBag(player.id));
+	});
 
 });
 

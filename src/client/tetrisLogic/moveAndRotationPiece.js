@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:20 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 15:20:21 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 15:35:52 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ export const canMovePiece = (boardState, piece, newLocation) => {
 //direction = 1 | -1
 export const rotatePiece = (piece, direction) => {
 	const length = piece.length
-	const begin = direction === 1 ? length * (length - 1) : length - 1,
-		step = direction === 1 ? -length : length;
+	/*const begin = direction === 1 ? length * (length - 1) : length - 1,
+		step = direction === 1 ? -length : length;*/
 	return new Array(length).fill()
 		.map((useless, i) => new Array(length).fill() // Y
 			.map((useless, j) => { // X

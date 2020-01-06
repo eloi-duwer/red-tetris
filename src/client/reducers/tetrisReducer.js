@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:08 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 03:35:26 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 16:38:28 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@ import {
 	INITBOARDSTATE,
 	MOVEPIECE,
 	ROTATEPIECE,
-	NEXTFRAME
+	NEXTFRAME,
+	ADDBAGOFPIECES,
+	RESETBAGOFPIECES
 } from '../actions/tetrisActions.js'
 
 import { canMovePiece, rotatePiece } from '../tetrisLogic/moveAndRotationPiece'
 import wallKick from '../tetrisLogic/wallKick'
-import createPiece from '../tetrisLogic/createPiece'
+import nextPiece from '../tetrisLogic/nextPiece'
 import putPieceIntoBoard from '../tetrisLogic/putPieceIntoBoard'
 import checkTetris from '../tetrisLogic/checkTetris'
 
@@ -33,8 +35,10 @@ const tetrisReducer = (state = {}, action) => {
 			return {
 				...state,
 				boardState: initialBoardState,
-				piece: createPiece(),
+				piece: nextPiece(state),
+				piecesList: state.piecesList.slice(1),
 				points: 0,
+				gameOver: false,
 			};
 
 		case NEXTFRAME: {
@@ -50,14 +54,18 @@ const tetrisReducer = (state = {}, action) => {
 			}
 
 			let {newBoard, nbPoints} = checkTetris(putPieceIntoBoard(state.boardState, state.piece)),
-				newPiece = createPiece(),
+				newPiece = nextPiece(state),
 				pointsToAdd = calcPoints(nbPoints);
+
+			const isGameOver = !canMovePiece(newBoard, newPiece.piece, newPiece.pos);
 
 			return {
 				...state,
 				boardState: newBoard,
-				piece: newPiece, //Vérifier qu'on peut la poser, si on peut pas = game over
+				piece: isGameOver ? null : newPiece, //Vérifier qu'on peut la poser, si on peut pas = game over
+				piecesList: state.piecesList.slice(1),
 				points: state.points + pointsToAdd,
+				gameOver: isGameOver,
 			};
 		}
 
@@ -86,6 +94,20 @@ const tetrisReducer = (state = {}, action) => {
 				piece: newPiece
 			};
 		}
+
+		case ADDBAGOFPIECES:
+			const oldBag = state.piecesList || [];
+			return {
+				...state,
+				piecesList: [...oldBag, ...action.newBag],
+			}
+
+		case RESETBAGOFPIECES:
+			return {
+				...state,
+				piecesList: action.firstBag,
+			}
+
 		default:
 			return state;
 	}
