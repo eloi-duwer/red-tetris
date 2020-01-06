@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:08 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 16:38:28 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 18:04:06 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ import {
 	ROTATEPIECE,
 	NEXTFRAME,
 	ADDBAGOFPIECES,
-	RESETBAGOFPIECES
+	RESETBAGOFPIECES,
+	HOLDPIECE,
 } from '../actions/tetrisActions.js'
 
 import { canMovePiece, rotatePiece } from '../tetrisLogic/moveAndRotationPiece'
 import wallKick from '../tetrisLogic/wallKick'
-import nextPiece from '../tetrisLogic/nextPiece'
+import {nextPiece, resetPiecePosition} from '../tetrisLogic/nextPiece'
 import putPieceIntoBoard from '../tetrisLogic/putPieceIntoBoard'
 import checkTetris from '../tetrisLogic/checkTetris'
 
@@ -39,6 +40,8 @@ const tetrisReducer = (state = {}, action) => {
 				piecesList: state.piecesList.slice(1),
 				points: 0,
 				gameOver: false,
+				canHoldPiece: true,
+				heldPiece: null,
 			};
 
 		case NEXTFRAME: {
@@ -66,6 +69,7 @@ const tetrisReducer = (state = {}, action) => {
 				piecesList: state.piecesList.slice(1),
 				points: state.points + pointsToAdd,
 				gameOver: isGameOver,
+				canHoldPiece: true,
 			};
 		}
 
@@ -83,7 +87,7 @@ const tetrisReducer = (state = {}, action) => {
 				}
 			};
 
-		case ROTATEPIECE: {
+		case ROTATEPIECE:
 			const rotated = rotatePiece(state.piece.piece, action.direction);
 			let tmpOrientation = state.piece.orientation + action.direction,
 				newOrientation = (tmpOrientation < 0 ? 3 : tmpOrientation) % 4,
@@ -93,7 +97,19 @@ const tetrisReducer = (state = {}, action) => {
 				...state,
 				piece: newPiece
 			};
-		}
+
+		case HOLDPIECE:
+			if (!state.canHoldPiece)
+				return state;
+
+			const futurePiece = state.heldPiece || nextPiece(state);
+
+			return {
+				...state,
+				piece: futurePiece,
+				heldPiece: resetPiecePosition(state.piece),
+				canHoldPiece: false,
+			}
 
 		case ADDBAGOFPIECES:
 			const oldBag = state.piecesList || [];

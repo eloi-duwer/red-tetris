@@ -6,14 +6,14 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:09 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 17:41:01 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 17:49:10 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //Fonction appelée a chaque appui sur une touche
 
 import { store } from '../index'
-import { movePiece, rotatePiece } from '../actions/tetrisActions'
+import { movePiece, rotatePiece, holdPiece } from '../actions/tetrisActions'
 import ghostPiecePos from './ghostPiecePos'
 
 const keyDownControl = event => {
@@ -47,6 +47,9 @@ const keyDownControl = event => {
 			if (!bottomPos)
 				return;
 			store.dispatch(movePiece(bottomPos));
+			break;
+		case "Enter": //Hold piece
+			store.dispatch(holdPiece());
 			break;
 		default:
 			break;

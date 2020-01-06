@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 13:43:53 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 17:40:20 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ import { initBoardState } from '../actions/tetrisActions'
 import TetrisDisplayer from './TetrisDisplayer'
 import GameStarter from './GameStarter'
 import OtherPlayersDisplayer from './OtherPlayersDisplayer'
+import HoldAndCommingNextDisplayer from './HoldAndCommingNextDisplayer'
 import frameControl from '../tetrisLogic/frameControl'
 import keyDownControl from '../tetrisLogic/keyDownControl'
-
 
 const TetrisController = ({gameStarted, points, ...props}) => {
 
@@ -58,6 +58,7 @@ const TetrisController = ({gameStarted, points, ...props}) => {
 						<div>Vous avez {points} points</div>
 						<div style={{display: 'flex'}}>
 							<TetrisDisplayer size={25} ownPlayer/>
+							<HoldAndCommingNextDisplayer />
 							<OtherPlayersDisplayer />
 						</div>
 					</div>

@@ -6,12 +6,14 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:35:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 16:31:26 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 17:34:42 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 const app = require('http').createServer();
-const io = require('socket.io')(app);
+const io = require('socket.io')(app, {
+  pingTimeout: 60000,
+});
 
 const playerGenerator = require(__dirname + '/classes/Player.js');
 const gameGenerator = require(__dirname + '/classes/Game.js');
@@ -79,8 +81,8 @@ io.on('connection', socket => {
 	socket.on('updatePlayer', newPlayer => {
 		if (!player.joinedGame)
 			return
-		io.in(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
-		//socket.to(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
+		//io.in(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
+		socket.to(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
 	});
 
 	socket.on('gameOver', finalPoints => {

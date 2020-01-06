@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:38 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 16:37:50 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 17:49:46 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ export const ROTATEPIECE = "ROTATEPIECE";
 export const NEXTFRAME = "NEXTFRAME";
 export const ADDBAGOFPIECES = "ADDBAGOFPIECES";
 export const RESETBAGOFPIECES = "RESETBAGOFPIECES";
+export const HOLDPIECE = "HOLDPIECE";
 
 export const initBoardState = () => {
 	return {
@@ -51,4 +52,8 @@ export const addBagOfPieces = newBag => ({
 export const resetBagOfPieces = firstBag => ({
 	type: RESETBAGOFPIECES,
 	firstBag
+})
+
+export const holdPiece = () => ({
+	type: HOLDPIECE,
 })

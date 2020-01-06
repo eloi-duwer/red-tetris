@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 13:39:34 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/06 17:09:38 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,20 @@ const colorSelecter = (tetrisCase, piecePlaces, i, j) => {
 	return "white";
 }
 
+//Recuperation des cases a colorier pour la piece en cours
+//Et pour la preview de la piece, en gris
 const getPiecesPlacesToPaint = (board, piece, pos) => {
 	if (piece === emptyObj) return [];
-	let actualPieces = doIt(piece.piece, piece.pos, pieces.colors[piece.type]);
+	let actualPieces = convPieceCoords(piece.piece, piece.pos, pieces.colors[piece.type]);
 	let bottomPos = ghostPiecePos(board, piece);
 	if (!bottomPos) return actualPieces;
 
 	return [
 		...actualPieces,
-		...doIt(piece.piece, bottomPos, "lightgrey"),
+		...convPieceCoords(piece.piece, bottomPos, "lightgrey"),
 	];
 
-	function doIt(piece, pos, color) {
+	function convPieceCoords(piece, pos, color) {
 		let pieces = piece.map((row, i) => {
 			return row.map((piece, j) => {
 				if (piece !== 0)
