@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:28:17 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 13:59:39 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 16:38:56 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 
 import { setGame } from '../actions/socketActions'
 
-export const GameSelector = ({socket, ...props}) => {
+const GameSelector = ({socket, ...props}) => {
 
 	const joinGame = id => {
 		socket.emit("joinGame", id);

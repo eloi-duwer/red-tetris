@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:32 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 00:59:00 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 16:38:50 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ import { connect } from 'react-redux'
 import TetrisController from './TetrisController'
 import GameSelector from './GameSelector'
 
-export const App = (props) => {
+const App = (props) => {
 
 	const [pseudo, setPseudo] = useState("");
 

@@ -6,14 +6,14 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 00:42:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 17:44:14 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 16:39:00 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React, {useRef} from 'react'
 import { connect } from 'react-redux'
 
-export const GameStarter = (props) => {
+const GameStarter = (props) => {
 
 	const buttonRef = useRef();
 

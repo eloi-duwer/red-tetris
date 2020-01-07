@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 17:40:20 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 16:26:08 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@ import React, { useState, useEffect } from 'react'
 import {connect} from 'react-redux'
 import { initBoardState } from '../actions/tetrisActions'
 
-import TetrisDisplayer from './TetrisDisplayer'
 import GameStarter from './GameStarter'
-import OtherPlayersDisplayer from './OtherPlayersDisplayer'
-import HoldAndCommingNextDisplayer from './HoldAndCommingNextDisplayer'
+import TetrisDisplayer from '../components/TetrisDisplayer'
+import OtherPlayersDisplayer from '../components/OtherPlayersDisplayer'
+import HoldAndCommingNextDisplayer from '../components/HoldAndCommingNextDisplayer'
 import frameControl from '../tetrisLogic/frameControl'
 import keyDownControl from '../tetrisLogic/keyDownControl'
 

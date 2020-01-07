@@ -6,53 +6,44 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:39:37 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 18:24:20 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 16:38:28 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React from 'react'
 import { connect } from 'react-redux'
 
-import TetrisDisplayer from './TetrisDisplayer'
+import OnePieceDisplayer from './OnePieceDisplayer'
 
-import pieces from '../tetrisLogic/tetrisPieces'
-
-const arrayLoop = [0,0,0,0];
-
-export const HoldAndCommingNextDisplayer = (props) => {
-  console.log(props)
-	return (
-		<div className='HoldAndCommingNextDisplayer' style={{
+const HoldAndCommingNextDisplayer = (props) => <div
+  className='HoldAndCommingNextDisplayer'
+  style={{
       border: '2px solid black',
       borderRadius: '10px',
       display: 'flex',
       flexDirection: 'column',
-      width: '75px'
-    }}>
-      <div id='hold'>
-        <span>hold</span>
-        <div style={{width: '60px', height: '60px', display: "flex", flexWrap: "wrap", position: ' relative'}}>
-          {props.heldPiece
-            ? arrayLoop.map((useless, i) => arrayLoop.map((useless, j) => {
-              const style = {width: '15px', height: '15px', borderRadius: '5px'}
-              const color = (i < props.heldPiece.piece.length
-                  && j < props.heldPiece.piece[i].length
-                  && props.heldPiece.piece[i][j] === 1)
-                ? pieces.colors[props.heldPiece.type] : 'white';
-              return <div style={{...style, backgroundColor: color}}></div>;
-            }))
-            : undefined
+      alignItems: 'center',
+      width: '70px',
+      textAlign: 'center',
+      margin: '10px',
 
-          }
-        </div>
-      </div>
-      <div id='next'>next</div>
-		</div>
-	);
-}
+  }}>
+  <div id='hold'>
+    <span>hold</span>
+    <div style={{width: '60px', height: '60px'}}>
+      {props.heldPiece
+        ? <OnePieceDisplayer piece={props.heldPiece} size={15} />
+        : undefined
+      }
+    </div>
+  </div>
+  <div id='next'>
+    <span>next</span>
+    {props.piecesList.map((piece, i) => <OnePieceDisplayer key={i} piece={piece} size={15}/>)}
+  </div>
+</div>
 
 const mapStateToProps = (state) => {
-  console.log(state)
 	return {
     heldPiece: state.tetrisReducer.heldPiece,
     piecesList: state.tetrisReducer.piecesList.slice(0, 3),
