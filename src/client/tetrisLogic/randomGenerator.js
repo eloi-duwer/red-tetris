@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:31 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 15:57:55 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 19:08:03 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 * Du coup désynchro entre les joueurs mais mieux que de crasher / lagger
 */
 
-const defaultBag = [
+const bag = [
 	"j",
 	"i",
 	"l",
@@ -26,15 +26,10 @@ const defaultBag = [
 	"t"
 ];
 
-let actualBag = defaultBag.slice();
-
 const randomGenerator = () => {
 
 	console.error("Fallback de generation de piece!");
-	if (actualBag.length === 0)
-		actualBag = defaultBag.slice();
-	let randIndex = Math.floor(Math.random() * actualBag.length);
-	return (actualBag.splice(randIndex, 1))[0];
+	return bag[Math.floor(Math.random() * bag.length)];
 
 };
 

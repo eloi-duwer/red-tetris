@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:09 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 17:49:10 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 20:02:51 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ import { movePiece, rotatePiece, holdPiece } from '../actions/tetrisActions'
 import ghostPiecePos from './ghostPiecePos'
 
 const keyDownControl = event => {
-	event.stopPropagation();
-	let { tetrisReducer } = store.getState();
+	let { tetrisReducer, socketReducer } = store.getState();
 	let { pos } = tetrisReducer.piece || {},
 		{ boardState } = tetrisReducer,
 		{ piece } = tetrisReducer;
@@ -50,6 +49,9 @@ const keyDownControl = event => {
 			break;
 		case "Enter": //Hold piece
 			store.dispatch(holdPiece());
+			break;
+		case "KeyP": //cheat pour rajouter des lignes a tout le monde
+			socketReducer.socket.emit('addLockedRows', 1);
 			break;
 		default:
 			break;

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:08 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 18:32:19 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 19:20:49 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ import wallKick from '../tetrisLogic/wallKick'
 import {nextPiece, resetPiecePositionAndRotation} from '../tetrisLogic/nextPiece'
 import putPieceIntoBoard from '../tetrisLogic/putPieceIntoBoard'
 import checkTetris from '../tetrisLogic/checkTetris'
+import handleAddLockedRows from '../tetrisLogic/handleAddLockedRows'
 
 const width = 10;
 const height = 30;
@@ -135,7 +136,8 @@ const tetrisReducer = (state = {}, action) => {
 
 		case ADDLOCKEDROWS:
 			return {
-				...state
+				...state,
+				...handleAddLockedRows(state, action.numberOfRows),
 			}
 
 		default:
@@ -155,6 +157,8 @@ function calcPoints(nb) {
 			return 300;
 		case 4:
 			return 1200;
+		default:
+			return 0;
 	}
 }
 

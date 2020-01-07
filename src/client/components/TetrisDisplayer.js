@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 17:57:20 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 19:24:26 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ import ghostPiecePos from '../tetrisLogic/ghostPiecePos'
 const divRef = React.createRef()
 
 const colorSelecter = (tetrisCase, piecePlaces, i, j) => {
+	if (tetrisCase === -1)
+		return 'black';
 	if (tetrisCase !== 0)
 		return tetrisCase;
 	let place = piecePlaces.find(p => p.x === j && p.y === i);
