@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:35:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 16:18:14 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 18:30:29 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ io.on('connection', socket => {
 	socket.on('updatePlayer', newPlayer => {
 		if (!player.joinedGame)
 			return
-		//io.in(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
-		socket.to(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
+		io.in(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
+		//socket.to(player.joinedGame.id).emit('updatePlayer', {id: player.id, ...newPlayer});
 	});
 
 	socket.on('gameOver', finalPoints => {
@@ -95,6 +95,13 @@ io.on('connection', socket => {
 			return;
 		socket.emit('nextBag', player.joinedGame.randomPieceGenerator.getNextBag(player.id));
 	});
+
+  socket.on('addLockedRows', number => {
+    if (!player.joinedGame)
+      return;
+    io.in(player.joinedGame.id).emit('addLockedRows', number);
+    //socket.to(player.joinedGame.id).emit('addLockedRows', number);
+  });
 
 });
 

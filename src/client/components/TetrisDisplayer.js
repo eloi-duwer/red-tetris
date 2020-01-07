@@ -6,14 +6,17 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 16:33:47 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 17:57:20 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React from 'react'
 import { connect } from 'react-redux'
-import pieces from '../tetrisLogic/tetrisPieces'
 
+import TetrisSquare from './TetrisSquare'
+import GameOverOverlay from './GameOverOverlay'
+
+import pieces from '../tetrisLogic/tetrisPieces'
 import ghostPiecePos from '../tetrisLogic/ghostPiecePos'
 
 const divRef = React.createRef()
@@ -54,31 +57,26 @@ const getPiecesPlacesToPaint = (board, piece, pos) => {
 	}
 }
 
-const GameOverOverlay = ({points, ownPlayer, pseudo = "Unknown"}) => <div style={{
-	position: ' absolute',
-	height: ' 100%',
-	width: ' 100%',
-	backgroundColor: 'rgba(200, 200, 200, 0.5)',
-	display: 'flex',
-	textAlign: 'center',
-	justifyContent: 'center',
-	alignItems: 'center',
-}}>
-	<div>{ownPlayer ? "Vous avez " : `Le joueur ${pseudo} a `} perdu! Score final: {points} points</div>
-</div>;
-
 const TetrisDisplayer = ({boardState, tetrisPiece, size, ...props}) => {
 
 	let piecePlaceToPaint = getPiecesPlacesToPaint(boardState, tetrisPiece);
 
-	return (<div style={{width: (size * 10) + 'px', height: (size * 20) + 'px', display: "flex", flexWrap: "wrap", border: '2px solid black', margin: '10px', borderRadius: '10px', position: ' relative'}}>
+	const mainDivStyle = {
+		width: (size * 10) + 'px',
+		minWidth: (size * 10) + 'px',
+		height: (size * 20) + 'px',
+		minHeight: (size * 20) + 'px',
+		display: "flex", flexWrap: "wrap",
+		border: '2px solid black', borderRadius: '10px',
+		margin: '10px',
+		position: 'relative'
+	};
+
+	return (<div style={mainDivStyle}>
 		{props.gameOver ? <GameOverOverlay points={props.points} ownPlayer={props.ownPlayer} pseudo={props.pseudo}/> : undefined}
-		{boardState.slice(10).map((tetrisRow, i) => tetrisRow.map((tetrisCase, j) => <div key={'' + i + j} style={{
-				backgroundColor: colorSelecter(tetrisCase, piecePlaceToPaint, i, j),
-				height: size + 'px',
-				flexBasis: '10%',
-				borderRadius: '30%'}}>
-			</div>
+		{boardState.slice(10).map((tetrisRow, i) =>
+			tetrisRow.map((tetrisCase, j) =>
+				<TetrisSquare key={'' + i + j} size={size} color={colorSelecter(tetrisCase, piecePlaceToPaint, i, j)}/>
 		))}
 	</div>);
 }

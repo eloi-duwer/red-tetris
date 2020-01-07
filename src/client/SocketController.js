@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 18:07:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 16:36:54 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 18:31:27 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ import {
 import {
 	addBagOfPieces,
 	resetBagOfPieces,
+	addLockedRows,
 } from './actions/tetrisActions'
 
 export default reduxStore => {
@@ -58,5 +59,9 @@ export default reduxStore => {
 
 	socket.on('nextBag', nextBag => {
 		reduxStore.dispatch(addBagOfPieces(nextBag));
-	})
+	});
+
+	socket.on('addLockedRows', number => {
+		reduxStore.dispatch(addLockedRows(number));
+	});
 }

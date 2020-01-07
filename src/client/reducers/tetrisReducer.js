@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:08 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 18:04:06 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 18:32:19 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@ import {
 	ADDBAGOFPIECES,
 	RESETBAGOFPIECES,
 	HOLDPIECE,
+	ADDLOCKEDROWS,
 } from '../actions/tetrisActions.js'
 
 import { canMovePiece, rotatePiece } from '../tetrisLogic/moveAndRotationPiece'
 import wallKick from '../tetrisLogic/wallKick'
-import {nextPiece, resetPiecePosition} from '../tetrisLogic/nextPiece'
+import {nextPiece, resetPiecePositionAndRotation} from '../tetrisLogic/nextPiece'
 import putPieceIntoBoard from '../tetrisLogic/putPieceIntoBoard'
 import checkTetris from '../tetrisLogic/checkTetris'
 
 const width = 10;
 const height = 30;
-const initialBoardState = new Array(height).fill().map(a => new Array(width).fill(0));
+const initialBoardState = Array.from(Array(height), () => Array.from(Array(width), () => 0));
 
 const tetrisReducer = (state = {}, action) => {
 	switch(action.type) {
@@ -52,7 +53,8 @@ const tetrisReducer = (state = {}, action) => {
 					piece: {
 						...state.piece,
 						pos: tryPos
-					}
+					},
+					nbRowsCleared: 0,
 				}
 			}
 
@@ -68,6 +70,7 @@ const tetrisReducer = (state = {}, action) => {
 				piece: isGameOver ? null : newPiece, //Vérifier qu'on peut la poser, si on peut pas = game over
 				piecesList: state.piecesList.slice(1),
 				points: state.points + pointsToAdd,
+				nbRowsCleared: nbPoints,
 				gameOver: isGameOver,
 				canHoldPiece: true,
 			};
@@ -102,13 +105,19 @@ const tetrisReducer = (state = {}, action) => {
 			if (!state.canHoldPiece)
 				return state;
 
-			const futurePiece = state.heldPiece || nextPiece(state);
+			const hasAlreadyPieceInHold = !!state.heldPiece,
+				futurePiece = hasAlreadyPieceInHold
+				 ? state.heldPiece
+				 : nextPiece(state);
 
 			return {
 				...state,
 				piece: futurePiece,
-				heldPiece: resetPiecePosition(state.piece),
+				heldPiece: resetPiecePositionAndRotation(state.piece),
+				//Si on n'a pas de pieces en hold, il faut prendre la suivant dans la liste
+				piecesList: hasAlreadyPieceInHold ? state.piecesList: state.piecesList.slice(1),
 				canHoldPiece: false,
+				gameOver: !canMovePiece(state.boardState, futurePiece.piece, futurePiece.pos),
 			}
 
 		case ADDBAGOFPIECES:
@@ -122,6 +131,11 @@ const tetrisReducer = (state = {}, action) => {
 			return {
 				...state,
 				piecesList: action.firstBag,
+			}
+
+		case ADDLOCKEDROWS:
+			return {
+				...state
 			}
 
 		default:

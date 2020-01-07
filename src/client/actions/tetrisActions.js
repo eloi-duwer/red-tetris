@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:38 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 17:49:46 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 18:25:17 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ export const NEXTFRAME = "NEXTFRAME";
 export const ADDBAGOFPIECES = "ADDBAGOFPIECES";
 export const RESETBAGOFPIECES = "RESETBAGOFPIECES";
 export const HOLDPIECE = "HOLDPIECE";
+export const ADDLOCKEDROWS = "ADDLOCKEDROWS";
 
 export const initBoardState = () => {
 	return {
@@ -56,4 +57,9 @@ export const resetBagOfPieces = firstBag => ({
 
 export const holdPiece = () => ({
 	type: HOLDPIECE,
-})
+});
+
+export const addLockedRows = number => ({
+	type: ADDLOCKEDROWS,
+	numberOfRows: number
+});

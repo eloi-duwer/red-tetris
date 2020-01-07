@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:19:26 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 15:19:33 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 17:19:17 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ const checkTetris = (board) => {
 	const filtered = board.filter((useless, i) => allTetrisLines.indexOf(i) === -1 ? true: false);
 
 	return {
-		newBoard: [...(new Array(allTetrisLines.length).fill().map(a => new Array(10).fill(0))), ...filtered],
+		newBoard: [...(Array.from(Array(allTetrisLines.length), () => Array.from(Array(10), () => 0))), ...filtered],
 		nbPoints: 30 - filtered.length
 	};
 }

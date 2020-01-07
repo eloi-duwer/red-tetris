@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 15:42:53 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 16:36:20 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 17:20:50 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ import React from 'react'
 
 import pieces from '../tetrisLogic/tetrisPieces'
 
-const arrayLoop = [0,0,0,0];
+const arrayLoop = Array.from(Array(4), () => {});
 
 const OnePieceDisplayer = ({piece, size}) => {
   const pieceArray = piece instanceof String || typeof piece === "string" ? pieces[piece] : piece.piece,
