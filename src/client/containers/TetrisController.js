@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 16:26:08 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 20:59:03 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
 	return {
 		points: state.tetrisReducer.points || 0,
 		gameStarted: !!state.socketReducer.gameStarted,

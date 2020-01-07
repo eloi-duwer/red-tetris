@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:19:48 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 18:32:18 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 20:54:44 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 import { store } from '../index'
 
-import { addPieceToBoard, nextFrame } from '../actions/tetrisActions'
+import { nextFrame } from '../actions/tetrisActions'
 
 const boardStateToSend = (boardState, isGhost = true) => {
 	if (!isGhost)
@@ -36,7 +36,7 @@ const frameControl = () => {
 		nbRowsCleared = state.tetrisReducer.nbRowsCleared;
 
 		socket.emit('updatePlayer', {
-			points: state.tetrisReducer.points,
+			points: points,
 			boardState: boardStateToSend(state.tetrisReducer.boardState),
 			piece: state.tetrisReducer.piece
 		});

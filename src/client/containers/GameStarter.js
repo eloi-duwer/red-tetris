@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 00:42:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 16:39:00 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 20:58:23 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = () => {
 	return {}
 };
 

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:08 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 19:20:49 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 20:56:40 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ const tetrisReducer = (state = {}, action) => {
 			};
 		}
 
-		case MOVEPIECE:
+		case MOVEPIECE: {
 			let newPos;
 			if (canMovePiece(state.boardState, state.piece.piece, action.newPos))
 				newPos = action.newPos;
@@ -90,8 +90,9 @@ const tetrisReducer = (state = {}, action) => {
 					pos: newPos,
 				}
 			};
+		}
 
-		case ROTATEPIECE:
+		case ROTATEPIECE: {
 			const rotated = rotatePiece(state.piece.piece, action.direction);
 			let tmpOrientation = state.piece.orientation + action.direction,
 				newOrientation = (tmpOrientation < 0 ? 3 : tmpOrientation) % 4,
@@ -101,15 +102,16 @@ const tetrisReducer = (state = {}, action) => {
 				...state,
 				piece: newPiece
 			};
+		}
 
-		case HOLDPIECE:
+		case HOLDPIECE: {
 			if (!state.canHoldPiece)
 				return state;
 
 			const hasAlreadyPieceInHold = !!state.heldPiece,
 				futurePiece = hasAlreadyPieceInHold
-				 ? state.heldPiece
-				 : nextPiece(state);
+					? state.heldPiece
+					: nextPiece(state);
 
 			return {
 				...state,
@@ -120,25 +122,29 @@ const tetrisReducer = (state = {}, action) => {
 				canHoldPiece: false,
 				gameOver: !canMovePiece(state.boardState, futurePiece.piece, futurePiece.pos),
 			}
+		}
 
-		case ADDBAGOFPIECES:
+		case ADDBAGOFPIECES: {
 			const oldBag = state.piecesList || [];
 			return {
 				...state,
 				piecesList: [...oldBag, ...action.newBag],
 			}
+		}
 
-		case RESETBAGOFPIECES:
+		case RESETBAGOFPIECES: {
 			return {
 				...state,
 				piecesList: action.firstBag,
 			}
+		}
 
-		case ADDLOCKEDROWS:
+		case ADDLOCKEDROWS: {
 			return {
 				...state,
 				...handleAddLockedRows(state, action.numberOfRows),
 			}
+		}
 
 		default:
 			return state;

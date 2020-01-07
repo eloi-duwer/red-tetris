@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:09 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 20:02:51 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/07 20:52:48 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ const keyDownControl = event => {
 		case "ArrowRight":
 			store.dispatch(movePiece({x: pos.x + 1, y: pos.y}));
 			break;
-		case "Space": //hard drop
+		case "Space": {//hard drop
 			let bottomPos = ghostPiecePos(boardState, piece);
 			if (!bottomPos)
 				return;
 			store.dispatch(movePiece(bottomPos));
 			break;
+		}
 		case "Enter": //Hold piece
 			store.dispatch(holdPiece());
 			break;
