@@ -16,6 +16,6 @@ import tetrisReducer from './tetrisReducer'
 import socketReducer from './socketReducer'
 
 export default combineReducers({
-	tetrisReducer,
-	socketReducer,
+  tetrisReducer,
+  socketReducer,
 });

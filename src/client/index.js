@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:52 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/03 18:11:09 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/08 15:01:01 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ import App from './containers/app'
 
 import reducers from './reducers/allReducers'
 
-import SocketController from './SocketController'
+import socketController from './SocketController'
 
 export const store = createStore(reducers,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //Redux DevTools
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDom.render(
-	<Provider store={store}>
-		<App/>
-	</Provider>,
-	document.getElementById('main')
+  <Provider store={store}>
+    <App/>
+  </Provider>,
+  document.getElementById('main')
 );
 
-SocketController(store);
+socketController(store);

@@ -17,19 +17,19 @@
 */
 
 const bag = [
-	"j",
-	"i",
-	"l",
-	"o",
-	"z",
-	"s",
-	"t"
+  'j',
+  'i',
+  'l',
+  'o',
+  'z',
+  's',
+  't',
 ];
 
 const randomGenerator = () => {
 
-	console.error("Fallback de generation de piece!");
-	return bag[Math.floor(Math.random() * bag.length)];
+  console.error('Fallback de generation de piece!');
+  return bag[Math.floor(Math.random() * bag.length)];
 
 };
 

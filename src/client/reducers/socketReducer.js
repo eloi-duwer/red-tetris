@@ -17,60 +17,60 @@ import {
   SETGAME,
   SETGAMESTARTED,
   SETPLAYERSINFO,
-  UPDATEPLAYERINFO
+  UPDATEPLAYERINFO,
 } from '../actions/socketActions.js'
 
 const socketReducer = (state = {}, action) => {
-  switch(action.type) {
-    case SETGAMELIST:
-      return {
-        ...state,
-        gameList: action.gameList,
-      };
-    case SETSOCKET:
-      return {
-        ...state,
-        socket: action.socket
-      }
+  switch (action.type) {
+  case SETGAMELIST:
+    return {
+      ...state,
+      gameList: action.gameList,
+    };
+  case SETSOCKET:
+    return {
+      ...state,
+      socket: action.socket,
+    }
 
-    case SETID:
-      return {
-        ...state,
-        id: action.id,
-      }
+  case SETID:
+    return {
+      ...state,
+      id: action.id,
+    }
 
-    case SETGAME:
-      return {
-        ...state,
-        game: action.game
-      }
+  case SETGAME:
+    return {
+      ...state,
+      game: action.game,
+    }
 
-    case SETGAMESTARTED:
-      return {
-        ...state,
-        gameStarted: action.gameStarted,
-      }
+  case SETGAMESTARTED:
+    return {
+      ...state,
+      gameStarted: action.gameStarted,
+    }
 
-    case SETPLAYERSINFO:
-      return {
-        ...state,
-        playersInfo: action.playersInfo,
-      }
+  case SETPLAYERSINFO:
+    return {
+      ...state,
+      playersInfo: action.playersInfo,
+    }
 
-    case UPDATEPLAYERINFO:
-      return {
-        ...state,
-        playersInfo: {
-          ...state.playersInfo,
-          [action.newPlayerInfo.id]: {
-            ...state.playersInfo[action.newPlayerInfo.id],
-            ...action.newPlayerInfo
-          },
-        }
-      }
+  case UPDATEPLAYERINFO:
+    return {
+      ...state,
+      playersInfo: {
+        ...state.playersInfo,
+        [action.newPlayerInfo.id]: {
+          ...state.playersInfo[action.newPlayerInfo.id],
+          ...action.newPlayerInfo,
+        },
+      },
+    }
 
-    default:
-      return state;
+  default:
+    return state;
   }
 }
 

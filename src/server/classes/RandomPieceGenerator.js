@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:49:55 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/06 16:22:39 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/08 14:33:09 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,22 @@
 
 class BagOfPieces {
   constructor() {
-    let pieces = [
-      "j",
-    	"i",
-    	"l",
-    	"o",
-    	"z",
-    	"s",
-    	"t"
+    const pieces = [
+      'j',
+      'i',
+      'l',
+      'o',
+      'z',
+      's',
+      't',
     ];
     this.pieces = [];
     while (pieces.length) {
-      let randIndex = Math.floor(Math.random() * pieces.length); //On récupère la piece a rajouter
-      this.pieces.push(pieces.splice(randIndex, 1)[0]); //On la rajoute a la liste, en l'enlevant de la liste des pieces a rajouter
+      // On récupère la piece a rajouter
+      const randIndex = Math.floor(Math.random() * pieces.length);
+
+      // On la rajoute a la liste, en l'enlevant de la liste des pieces a rajouter
+      this.pieces.push(pieces.splice(randIndex, 1)[0]);
     }
   }
 
@@ -43,18 +46,23 @@ class BagOfPieces {
 
 class RandomPieceGenerator {
   constructor() {
-    this.bags = []; //liste des Sacs assignés a cette partie
-    this.ids = {}; //Mémoire du nombre de sacs demandés par chaque joueur de la partie
+
+    // liste des Sacs assignés a cette partie
+    this.bags = [];
+
+    // Mémoire du nombre de sacs demandés par chaque joueur de la partie
+    this.ids = {};
   }
 
   getNextBag(playerId) {
     let indexToGet = this.ids[playerId];
-    if (indexToGet === undefined) { //Le joueur n'avait encore rien demandé
+
+    // Le joueur n'avait encore rien demandé
+    if (indexToGet === undefined) {
       this.ids[playerId] = 1;
       indexToGet = 1;
     }
-    if (this.bags[indexToGet] === undefined)
-      this.bags[indexToGet] = new BagOfPieces();
+    if (this.bags[indexToGet] === undefined) { this.bags[indexToGet] = new BagOfPieces(); }
     return this.bags[indexToGet].toSend();
   }
 
@@ -66,4 +74,4 @@ class RandomPieceGenerator {
 
 }
 
-module.exports = RandomPieceGenerator;
+export default RandomPieceGenerator;

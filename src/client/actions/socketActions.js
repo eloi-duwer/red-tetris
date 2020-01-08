@@ -10,45 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-export const SETSOCKET = "SETSOCKET";
-export const SETGAMELIST = "SETGAMELIST";
-export const SETGAME = "SETGAME";
-export const SETGAMESTARTED = "SETGAMESTARTED";
-export const SETPLAYERSINFO = "SETPLAYERSINFO";
-export const UPDATEPLAYERINFO = "UPDATEPLAYERINFO";
-export const SETID = "SETID";
+export const SETSOCKET = 'SETSOCKET';
+export const SETGAMELIST = 'SETGAMELIST';
+export const SETGAME = 'SETGAME';
+export const SETGAMESTARTED = 'SETGAMESTARTED';
+export const SETPLAYERSINFO = 'SETPLAYERSINFO';
+export const UPDATEPLAYERINFO = 'UPDATEPLAYERINFO';
+export const SETID = 'SETID';
 
 export const setSocket = socket => ({
-    type: SETSOCKET,
-    socket,
+  type: SETSOCKET,
+  socket,
 })
 
 export const setGameList = gameList => ({
-    type: SETGAMELIST,
-    gameList,
+  type: SETGAMELIST,
+  gameList,
 })
 
 export const setId = id => ({
-    type: SETID,
-    id
+  type: SETID,
+  id,
 })
 
 export const setGame = game => ({
-    type: SETGAME,
-    game,
+  type: SETGAME,
+  game,
 })
 
 export const setGameStarted = gameStarted => ({
-    type: SETGAMESTARTED,
-    gameStarted,
+  type: SETGAMESTARTED,
+  gameStarted,
 })
 
 export const setPlayersInfo = playersInfo => ({
-    type: SETPLAYERSINFO,
-    playersInfo,
+  type: SETPLAYERSINFO,
+  playersInfo,
 })
 
 export const updatePlayerInfo = newPlayerInfo => ({
-    type: UPDATEPLAYERINFO,
-    newPlayerInfo,
+  type: UPDATEPLAYERINFO,
+  newPlayerInfo,
 })

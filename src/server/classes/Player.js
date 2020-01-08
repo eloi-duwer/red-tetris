@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.js                                          :+:      :+:    :+:   */
+/*   Player.mjs                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:18:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/05 05:00:27 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/08 14:06:22 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,15 @@ class Player {
   }
 
   joinGame(game) {
-    if (!game)
-      return;
-    if (game.playerList.length === 0)
-      game.creator = this;
+    if (!game) { return; }
+    if (game.playerList.length === 0) { game.creator = this; }
     game.addPlayer(this);
     this.joinedGame = game;
 
   }
 
   quitGame() {
-    if (this.joinedGame)
-      this.joinedGame.removePlayer(this);
+    if (this.joinedGame) { this.joinedGame.removePlayer(this); }
     this.joinedGame = null;
   }
 
@@ -49,9 +46,9 @@ class PlayerGenerator {
   }
 
   createPlayer(socket, pseudo = 'unknown', roomId = null) {
-    this.id++;
+    this.id = this.id + 1;
     return new Player(this.id, pseudo, roomId, socket);
   }
 }
 
-module.exports = new PlayerGenerator();
+export default new PlayerGenerator();
