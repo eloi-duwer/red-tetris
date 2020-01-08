@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 17:04:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 15:45:08 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/08 22:10:47 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,17 @@ const GhostDisplayer = ({ boardState, gameOver, size, points, pseudo }) => (
 )
 
 GhostDisplayer.propTypes = {
-  boardState: PropTypes.array.isRequired,
+  boardState: PropTypes.array,
   gameOver: PropTypes.bool.isRequired,
   points: PropTypes.number.isRequired,
   pseudo: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
 }
 
-const emptyArray = [];
-
 const mapStateToProps = (state, props) => {
   const playerInfo = (state.socketReducer.playersInfo || {})[props.id] || {};
   return {
-    boardState: playerInfo.boardState || emptyArray,
+    boardState: playerInfo.boardState,
     gameOver: playerInfo.gameOver || false,
     points: playerInfo.points || 0,
     pseudo: playerInfo.pseudo,

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 16:13:32 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 14:38:35 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/08 19:35:13 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ export function nextPiece(state) {
     orientation: 0,
   };
 }
+
 export function resetPiecePositionAndRotation(piece) {
   return {
     type: piece.type,

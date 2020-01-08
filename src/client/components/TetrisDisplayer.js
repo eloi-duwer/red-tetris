@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 15:43:16 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/08 20:30:35 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ const TetrisDisplayer = ({ boardState, tetrisPiece, size, ...props }) => {
     position: 'relative',
   };
 
-  return (<div style={mainDivStyle}>
+  return (<div className='TetrisDisplayer' style={mainDivStyle}>
     {props.gameOver ?
       <GameOverOverlay ownPlayer={props.ownPlayer} points={props.points} pseudo={props.pseudo}/> :
       undefined

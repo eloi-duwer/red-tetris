@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 04:17:55 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 15:44:31 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/08 21:37:19 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,22 @@ const OtherPlayersDisplayer = (props) => (
     flexWrap: 'wrap',
     alignItems: 'flex-start',
   }}>
-    {Object.keys(props.playersInfo).map((id, i) =>
-
-    // if (+id === +props.ownId)
-    // return undefined;
-      <div key={i} style={{ 'border': '1px solid grey', 'borderRadius': '10px', margin: '10px', padding: '5px' }}>
+    {Object.keys(props.playersInfo).map((id, i) => {
+      if (Number(id) === Number(props.ownId)) { return undefined; }
+      return <div key={i} style={{ 'border': '1px solid grey', 'borderRadius': '10px', margin: '10px', padding: '5px' }}>
         <span>{props.playersInfo[id].pseudo}: {props.playersInfo[id].points} points</span>
         {props.isGhost ?
           <GhostDisplayer id={id} size={10} /> :
           <TetrisDisplayer id={id} size={10} />
         }
       </div>
-    )}
+    })}
   </div>
 )
 
 OtherPlayersDisplayer.propTypes = {
   isGhost: PropTypes.bool.isRequired,
+  ownId: PropTypes.number.isRequired,
   playersInfo: PropTypes.object.isRequired,
 }
 

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 15:42:53 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 15:46:07 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/08 21:27:59 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ const arrayLoop = Array.from(Array(maxPieceSize), () => {});
 const OnePieceDisplayer = ({ piece, size }) => {
   const pieceArray = piece instanceof String || typeof piece === 'string' ? pieces[piece] : piece.piece,
     type = piece instanceof String || typeof piece === 'string' ? piece : piece.type;
-  return <div style={{ display: 'flex', flexWrap: 'wrap', position: ' relative', width: `${size * maxPieceSize }px` }}>
+  return <div
+    className='OnePieceDisplayer'
+    style={{ display: 'flex', flexWrap: 'wrap', position: ' relative', width: `${size * maxPieceSize }px` }}
+  >
     {arrayLoop.map((useless, i) => arrayLoop.map((useless, j) => {
       const style = { width: `${size }px`, height: `${size }px`, borderRadius: '30%' }
       const color = (i < pieceArray.length &&
