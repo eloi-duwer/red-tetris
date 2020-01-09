@@ -6,13 +6,13 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:09 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 14:45:06 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/09 15:19:15 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Fonction appelée a chaque appui sur une touche
 
-import { store } from '../index'
+import { store } from '../store'
 import { movePiece, rotatePiece, holdPiece } from '../actions/tetrisActions'
 import ghostPiecePos from './ghostPiecePos'
 

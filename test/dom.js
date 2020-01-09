@@ -6,13 +6,15 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:09:22 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 18:09:25 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/09 14:05:47 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import { JSDOM } from 'jsdom';
 
-const { window } = new JSDOM('<!doctype html><html><body></body></html>');
+const { window } = new JSDOM('<!doctype html><html><body><div id="main"></div></body></html>');
+
+//Creation d'une page coté serveur avec JSDOM, pour etre utilisé par enzyme apres
 
 function copyProps(src, target) {
   const props = Object.getOwnPropertyNames(src)

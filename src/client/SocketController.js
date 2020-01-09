@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   SocketController.js                                :+:      :+:    :+:   */
+/*   socketController.js                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 18:07:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 18:31:27 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/09 13:41:18 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ import {
 } from './actions/tetrisActions'
 
 export default reduxStore => {
+
   const socket = socketIOClient(':8081');
 
   reduxStore.dispatch(setSocket(socket));

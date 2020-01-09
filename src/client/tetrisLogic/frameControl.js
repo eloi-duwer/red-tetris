@@ -6,13 +6,13 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:19:48 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 14:54:42 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/09 15:19:16 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Fonction appelée a chaque descente du bloc (tt les secondes, via un setInterval)
 
-import { store } from '../index'
+import { store } from '../store'
 
 import { nextFrame } from '../actions/tetrisActions'
 

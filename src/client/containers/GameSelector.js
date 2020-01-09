@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:28:17 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 15:11:21 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/09 16:24:38 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ const GameSelector = ({ socket, ...props }) => {
     <div className='GameSelector'>
 			Quelle partie souhaitez-vous rejoindre?
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-        {props.gameList.map((game, i) => <div key={i} style={boxStyle}>
+        {props.gameList.map((game, i) => <div className='oneGame' key={i} style={boxStyle}>
           <div>Id: {game.id}</div>
           <div>nom: {game.name}</div>
           <div>créateur: {game.creator}</div>
