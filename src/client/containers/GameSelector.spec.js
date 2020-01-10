@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:46:20 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/09 16:23:12 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 21:38:29 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ describe('Tests for GameSelector', () => {
 	});
 
 	it('Joins the game', done => {
-		emitter.on('joinGame', id => {
+		emitter.on('tryToJoinGame', id => {
 			expect(id).to.equal(idGame);
 			done();
 		});

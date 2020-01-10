@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:28:17 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 17:35:36 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 21:37:54 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ import PropTypes from 'prop-types'
 const GameSelector = ({ socket, ...props }) => {
 
   const joinGame = id => {
-    socket.emit('joinGame', id);
+    socket.emit('tryToJoinGame', id);
   }
 
   const createGame = name => {

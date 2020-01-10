@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:24:20 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/09 16:46:37 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 22:11:34 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ describe('Tests for GameStarter', () => {
 		storeAdmin.socketReducer.socket = emit1;
 		storeAdmin.socketReducer.gameStarted = false;
 		let wrapper = shallow(<GameStarterRedux store={mockStore(storeAdmin)}/>);
-		emit1.on('startGame', () => {
+		emit1.on('tryToStartGame', () => {
 			expect(true, 'startGame is called').to.equal(true);
 			done();
 		})

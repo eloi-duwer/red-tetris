@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 00:42:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 15:08:40 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 22:11:23 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ const GameStarter = (props) => {
 
   const startGame = () => {
     if (buttonRef.current) { buttonRef.current.blur(); }
-    props.socket.emit('startGame');
+    props.socket.emit('tryToStartGame');
   }
 
   const stopGame = () => {

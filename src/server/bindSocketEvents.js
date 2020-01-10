@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:18:41 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 19:56:42 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 22:11:10 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ export default function bindSocketEvents(io, socket, player) {
 
 	function createGame(name) {
     const game = gameController.createGame(player, name || 'new game', new RandomPieceGenerator());
-    console.log(`new Game ${game.id}`);
+    //console.log(`new Game ${game.id}`);
     socket.broadcast.emit('gameList', gameController.getGames());
     player.joinGame(game);
     socket.join(game.id);
@@ -29,7 +29,7 @@ export default function bindSocketEvents(io, socket, player) {
 
 	socket.on('createGame', createGame);
 
-	socket.on('joinGame', id => {
+	socket.on('tryToJoinGame', id => {
 		let decoded = decodeURI(id);
 		const game = gameController.games[decoded];
 
@@ -38,20 +38,20 @@ export default function bindSocketEvents(io, socket, player) {
 		player.joinGame(game);
 		socket.join(id);
 		socket.emit('joinGame', game.toSend(player));
-		console.log(`player ${player.pseudo} joined room ${game.id}`);
+		//console.log(`player ${player.pseudo} joined room ${game.id}`);
 	});
 
 	socket.on('disconnect', () => {
-		console.log(`player ${player.pseudo} quitted his game`);
+		//console.log(`player ${player.pseudo} quitted his game`);
 		player.quitGame();
 	});
 
 	socket.on('changePseudo', pseudo => {
 		player.pseudo = pseudo;
-		console.log(`player ${player.id} changed pseudo to ${pseudo}`)
+		//console.log(`player ${player.id} changed pseudo to ${pseudo}`)
 	});
 
-	socket.on('startGame', () => {
+	socket.on('tryToStartGame', () => {
 		if (!player.joinedGame) { return; }
 		const firstBag = player.joinedGame.randomPieceGenerator.resetBeforeStart();
 		player.joinedGame.gameStarted = true;
@@ -76,7 +76,7 @@ export default function bindSocketEvents(io, socket, player) {
 
 	socket.on('gameOver', finalPoints => {
 		io.in(player.joinedGame.id).emit('updatePlayer', { id: player.id, gameOver: true, points: finalPoints });
-		console.log(`${player.pseudo} a fini sa partie avec ${finalPoints} points`);
+		//console.log(`${player.pseudo} a fini sa partie avec ${finalPoints} points`);
 	});
 
 	socket.on('getNextBag', () => {
