@@ -44,5 +44,5 @@ export default function wallKick(board, oldPieceData, newPiece, newOrientation) 
     return false;
   }, false);
 
-  return kickedPiece ? kickedPiece: oldPieceData;
+  return kickedPiece ? kickedPiece : oldPieceData;
 }

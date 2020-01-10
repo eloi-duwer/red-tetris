@@ -14,11 +14,10 @@ import pieces from './tetrisPieces'
 
 export default function putPieceIntoBoard(board, piece) {
 
-  //.flat non disponible en nodejs avant la v11, donc pour les tests ca matche pas...
+  // .flat non disponible en nodejs avant la v11, donc pour les tests ca matche pas...
   function flat(arr) {
     return arr.reduce((acc, val) => {
-      if (val instanceof Array)
-        return [...acc, ...flat(val)];
+      if (val instanceof Array) { return [...acc, ...flat(val)]; }
       return [...acc, val];
     }, [])
   }

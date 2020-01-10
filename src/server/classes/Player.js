@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.mjs                                         :+:      :+:    :+:   */
+/*   Player.js                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:18:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 14:06:22 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 19:38:48 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+import bindSocketEvents from '../bindSocketEvents'
+
 class Player {
-  constructor(id, pseudo, socket, roomId = null, joinedGame = null) {
+  constructor(id, pseudo, io, socket, roomId = null, joinedGame = null) {
     this.id = id;
     this.pseudo = pseudo;
     this.socket = socket
     this.roomId = roomId;
     this.joinedGame = joinedGame;
+    bindSocketEvents(io, socket, this);
   }
 
   joinGame(game) {
@@ -45,9 +48,9 @@ class PlayerGenerator {
     this.id = 0;
   }
 
-  createPlayer(socket, pseudo = 'unknown', roomId = null) {
+  createPlayer(io, socket, pseudo = 'unknown', roomId = null) {
     this.id = this.id + 1;
-    return new Player(this.id, pseudo, roomId, socket);
+    return new Player(this.id, pseudo, io, socket, roomId);
   }
 }
 

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:22:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 13:36:15 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 19:14:24 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ import {
 	setGameStarted,
 	setPlayersInfo,
 	updatePlayerInfo,
+	setPseudo
 } from '../actions/socketActions.js'
 
 describe('tests fom socketReducer.js', () => {
+
 	let state = {};
 
 	let array = [1,2,3];
@@ -68,5 +70,10 @@ describe('tests fom socketReducer.js', () => {
 		}));
 		expect(res.playersInfo).to.deep.equal({0: {points: 100, name: 'bob', id: 0}});
 	});
+
+	it('changes the pseudo', () => {
+		let res = socketReducer(state, setPseudo('bobi'));
+		expect(res.pseudo).to.equal('bobi');
+	})
 
 })

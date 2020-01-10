@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:09:22 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/09 14:05:47 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 18:58:40 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ function copyProps(src, target) {
     }), {});
   Object.defineProperties(target, props);
 }
+
 global.window = window;
 global.document = window.document;
 global.navigator = {

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 18:07:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/09 13:41:18 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 20:04:05 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ import {
   setGameStarted,
   setPlayersInfo,
   updatePlayerInfo,
+  setPseudo,
+  newGameAdmin,
 } from './actions/socketActions'
 
 import {
@@ -28,9 +30,29 @@ import {
   addLockedRows,
 } from './actions/tetrisActions'
 
+function joinGameAndSetPseudo(reduxStore, socket) {
+  let splitUrl = window.location.href.split('/');
+  const params = splitUrl[splitUrl.length - 1];
+  if(!params) {
+    return;
+  }
+  const gameName = (params.split('#')[1] || '').split('[')[0];
+  if (gameName) {
+    socket.emit('joinGame', gameName);
+  }
+  const pseudo = (params.split('[')[1] || '').split(']')[0];
+  if (pseudo) {
+    reduxStore.dispatch(setPseudo(pseudo));
+    socket.emit('changePseudo', pseudo);
+  }
+
+}
+
 export default reduxStore => {
 
   const socket = socketIOClient(':8081');
+
+  joinGameAndSetPseudo(reduxStore, socket);
 
   reduxStore.dispatch(setSocket(socket));
 
@@ -65,4 +87,9 @@ export default reduxStore => {
   socket.on('addLockedRows', number => {
     reduxStore.dispatch(addLockedRows(number));
   });
+
+  socket.on('newAdmin', () => {
+    reduxStore.dispatch(newGameAdmin());
+  });
+
 }

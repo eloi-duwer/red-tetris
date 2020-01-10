@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:46:26 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 20:49:56 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 20:04:37 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ export const SETGAMESTARTED = 'SETGAMESTARTED';
 export const SETPLAYERSINFO = 'SETPLAYERSINFO';
 export const UPDATEPLAYERINFO = 'UPDATEPLAYERINFO';
 export const SETID = 'SETID';
+export const SETPSEUDO = 'SETPSEUDO'
+export const NEWGAMEADMIN = 'NEWGAMEADMIN'
 
 export const setSocket = socket => ({
   type: SETSOCKET,
@@ -51,4 +53,13 @@ export const setPlayersInfo = playersInfo => ({
 export const updatePlayerInfo = newPlayerInfo => ({
   type: UPDATEPLAYERINFO,
   newPlayerInfo,
+})
+
+export const setPseudo = pseudo => ({
+  type: SETPSEUDO,
+  pseudo,
+})
+
+export const newGameAdmin = () => ({
+  type: NEWGAMEADMIN,
 })
