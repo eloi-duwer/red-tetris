@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:07:35 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/09 15:37:50 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 13:16:48 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,25 @@ global.socketReducer = {
 		},
 	},
 	id: 1,
+}
+
+//useEffect ne fonctionne pas pour les shallow rendering, et on ne peut pas monter les composants...
+//Donc on mock useEffect pour nos tests
+global.mockUseEffect = (cb, deps) => {
+	// create a new symbol, different at each run and save the first one
+		const firstRun = Symbol();
+		const isFirstRun = React.useMemo(() => firstRun, []) === firstRun;
+		const ref = React.useMemo(() => ({
+			current: deps,
+		}), []);
+		const last = ref.current;
+
+		// compare the last known version of deps with the current one
+		const changed = deps && last.some((value, i) => value !== deps[i]);
+
+		if (isFirstRun || changed) {
+			ref.current = deps;
+			// run the callback if it changed
+			cb();
+		}
 }

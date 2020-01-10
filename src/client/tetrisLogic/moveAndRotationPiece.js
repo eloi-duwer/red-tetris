@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:20 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 14:43:17 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 15:30:25 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ export const canMovePiece = (boardState, piece, newLocation) =>
   }).every(e => e)
 
 // le .map renvoie une liste de true/false, .every réduit le tout a un seul, true si tt est true, false sinn
-;
 
 /*
  Crée + remplit un tableau de la mm taille que la piece en entée
@@ -50,8 +49,6 @@ export const canMovePiece = (boardState, piece, newLocation) =>
 export const rotatePiece = (piece, direction) => {
   const length = piece.length
 
-  /* const begin = direction === 1 ? length * (length - 1) : length - 1,
-		step = direction === 1 ? -length : length;*/
   return new Array(length).fill()
 
     // Y

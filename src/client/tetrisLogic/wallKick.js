@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:20:41 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 14:34:56 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/10 16:31:31 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ export default function wallKick(board, oldPieceData, newPiece, newOrientation) 
     return false;
   }, false);
 
-  return kickedPiece === true ? oldPieceData : kickedPiece;
+  return kickedPiece ? kickedPiece: oldPieceData;
 }
