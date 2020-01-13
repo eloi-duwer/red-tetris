@@ -6,11 +6,9 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:18:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 19:38:48 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/13 19:40:15 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-import bindSocketEvents from '../bindSocketEvents'
 
 class Player {
   constructor(id, pseudo, io, socket, roomId = null, joinedGame = null) {
@@ -19,7 +17,6 @@ class Player {
     this.socket = socket
     this.roomId = roomId;
     this.joinedGame = joinedGame;
-    bindSocketEvents(io, socket, this);
   }
 
   joinGame(game) {
@@ -27,7 +24,6 @@ class Player {
     if (game.playerList.length === 0) { game.creator = this; }
     game.addPlayer(this);
     this.joinedGame = game;
-
   }
 
   quitGame() {

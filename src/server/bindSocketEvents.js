@@ -6,24 +6,23 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:18:41 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 22:11:10 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:10:32 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import gameController from './classes/GameController'
+import gameManager from './classes/GameManager'
 import RandomPieceGenerator from './classes/RandomPieceGenerator.js';
 
 export default function bindSocketEvents(io, socket, player) {
 
-	socket.emit('gameList', gameController.getGames(player));
+	socket.emit('gameList', gameManager.getGames(player));
   socket.emit('setId', player.id);
 
 	function createGame(name) {
-    const game = gameController.createGame(player, name || 'new game', new RandomPieceGenerator());
-    //console.log(`new Game ${game.id}`);
-    socket.broadcast.emit('gameList', gameController.getGames());
+    const game = gameManager.createGame(player, name || 'new game', new RandomPieceGenerator());
     player.joinGame(game);
     socket.join(game.id);
+		socket.broadcast.emit('gameList', gameManager.getGames());
     socket.emit('joinGame', game.toSend(player));
   }
 
@@ -31,7 +30,7 @@ export default function bindSocketEvents(io, socket, player) {
 
 	socket.on('tryToJoinGame', id => {
 		let decoded = decodeURI(id);
-		const game = gameController.games[decoded];
+		const game = gameManager.games[decoded];
 
 		// Envoyer un message si game pas valide ?
 		if (!game) { return createGame(decoded) }

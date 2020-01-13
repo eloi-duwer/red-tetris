@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:15:27 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 20:01:22 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:18:37 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import gameController from './GameController'
+import gameManager from './GameManager'
 
 class Game {
   constructor(name, player, randomPieceGenerator) {
@@ -40,11 +40,12 @@ class Game {
   removePlayer(player) {
     const index = this.playerList.findIndex(p => p.id === player.id);
     if (index >= 0) {
-      let removed = this.playerList.splice(index, 1)[0];
+      let removedPlayer = this.playerList.splice(index, 1)[0];
       if (this.playerList.length === 0) {
-        return gameController.deleteGame(this.id);
+        gameManager.deleteGame(this.id);
+        return;
       }
-      if (removed === this.creator) {
+      if (removedPlayer === this.creator) {
         this.creator = this.playerList[0];
         this.playerList[0].socket.emit('newAdmin');
       }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bindSocketEvents.spec.js                           :+:      :+:    :+:   */
+/*   bindSocketEvents.test.js                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 21:08:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 22:19:06 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/13 19:54:16 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ describe('Tests for bindSocketEvents', () => {
 			}
 		};
 
-		class MockGameController {
+		class MockGameManager {
 			constructor() {
 				this.games = {
 					1: {toSend: () => ({id: 1})},
@@ -49,7 +49,7 @@ describe('Tests for bindSocketEvents', () => {
 			}
 		}
 
-		bindSocketEvents.__Rewire__('gameController', new MockGameController());
+		bindSocketEvents.__Rewire__('gameManager', new MockGameManager());
 
 	});
 
@@ -104,9 +104,9 @@ describe('Tests for bindSocketEvents', () => {
 		expect(player.pseudo).to.equal('baba');
 	});
 
-	it('starts the game', () => {
+	/*it('starts the game', () => {
 		emitter.emit('tryToStartGame');
 		expect(player.joinedGame.gameStarted).to.equal(true);
-	})
+	})*/
 
 })
