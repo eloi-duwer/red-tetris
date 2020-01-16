@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:49:42 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 14:48:39 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/12 19:46:36 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ const handleAddLockedRows = (state, numberOfRows) => {
     ...state.boardState.slice(numberOfRows),
     ...Array.from(Array(Math.min(numberOfRows, boardHeight)), () => Array.from(Array(boardWidth), () => -1)),
   ];
+
+  if (!state.piece) {
+    return {};
+  }
 
   if (canMovePiece(newBoard, state.piece.piece, state.piece.pos)) {
     return { boardState: newBoard };
