@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:35:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/12 19:36:32 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/16 19:54:23 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ import conf from '../../conf'
 const app = http.createServer();
 
 import playerGenerator from './classes/Player.js';
-import gameController from './classes/GameController'
+import gameManager from './classes/GameManager'
+
 import bindSocketEvents from './bindSocketEvents'
 
-gameController.io = io;
+gameManager.io = io;
 
 const games = [];
 

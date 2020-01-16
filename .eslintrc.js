@@ -12,7 +12,7 @@ module.exports = {
       "version": "detect"
     }
   },
-  "ignorePatterns": ['*.spec.js'],
+  "ignorePatterns": ['*.test.js'],
   "rules": {
     /* Possible Errors */
     "comma-dangle": [1, "always-multiline"], //disallow or enforce trailing commas (recommended)

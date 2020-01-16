@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:18:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/12 19:32:49 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/16 19:54:01 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class Player {
     if (game.playerList.length === 0) { game.creator = this; }
     game.addPlayer(this);
     this.joinedGame = game;
-
   }
 
   quitGame() {

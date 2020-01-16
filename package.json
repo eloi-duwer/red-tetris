@@ -9,7 +9,7 @@
     "build": "NODE_ENV=production webpack --progress --colors",
     "start": "NODE_ENV=production node src/server/start.js",
     "eslint": "eslint src",
-    "test": "NODE_ENV=test mocha --require @babel/register --require ./test/helpers.js --require ./test/dom.js --reporter spec \"src/**/*.spec.js\"",
+    "test": "NODE_ENV=test mocha --require @babel/register --require ./test/helpers.js --require ./test/dom.js --reporter spec \"src/**/*.test.js\"",
     "coverage": "NODE_ENV=test nyc --include src --all -r text -r lcov --require @babel/register npm test"
   },
   "repository": {
@@ -67,7 +67,7 @@
   },
   "nyc": {
     "exclude": [
-      "src/**/*.spec.js",
+      "src/**/*.test.js",
       "build"
     ],
     "require": [

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GameController.js                                  :+:      :+:    :+:   */
+/*   GameManager.js                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:51:47 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 20:00:27 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/13 19:52:20 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import Game from './Game'
 
-class GameController {
+class GameManager {
   constructor() {
     this.games = {};
 		this.io = null;
@@ -46,4 +46,4 @@ class GameController {
 
 }
 
-export default new GameController();
+export default new GameManager();
