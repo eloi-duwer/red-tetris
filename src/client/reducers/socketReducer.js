@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:48:33 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 20:06:07 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 00:26:44 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ import {
   UPDATEPLAYERINFO,
   SETPSEUDO,
   NEWGAMEADMIN,
+  SAVETIMEOUTFUNC,
 } from '../actions/socketActions.js'
 
 function changeHashGame(game) {
@@ -98,6 +99,12 @@ const socketReducer = (state = {}, action) => {
     return {
       ...state,
       pseudo: action.pseudo,
+    }
+
+  case SAVETIMEOUTFUNC:
+    return {
+      ...state,
+      timeoutFunc: action.timeoutFunc,
     }
 
   default:

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:18:41 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 20:10:32 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 00:12:17 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ export default function bindSocketEvents(io, socket, player) {
 		//console.log(`player ${player.id} changed pseudo to ${pseudo}`)
 	});
 
-	socket.on('tryToStartGame', () => {
+	socket.on('tryToStartGame', gameConfig => {
 		if (!player.joinedGame) { return; }
 		const firstBag = player.joinedGame.randomPieceGenerator.resetBeforeStart();
 		player.joinedGame.gameStarted = true;
@@ -59,6 +59,7 @@ export default function bindSocketEvents(io, socket, player) {
 				.map(p => p.toSend())
 				.reduce((acc, val) => ({ ...acc, [val.id]: val }), {}),
 			firstBag: firstBag.toSend(),
+			gameConfig: gameConfig,
 		});
 	});
 

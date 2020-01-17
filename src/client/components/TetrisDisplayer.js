@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 20:30:35 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 01:56:04 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ const numberOfLines = 20;
 const numberOfRows = 10;
 
 const colorSelecter = (tetrisCase, piecePlaces, i, j) => {
-  if (tetrisCase === -1) { return 'black'; }
+  if (tetrisCase === -1 || tetrisCase === -2) { return 'black'; }
   if (tetrisCase !== 0) { return tetrisCase; }
   const place = piecePlaces.find(p => p.x === j && p.y === i);
   if (place) { return place.color; }

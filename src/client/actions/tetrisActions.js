@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:38 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/07 20:50:12 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 00:13:53 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ export const ADDBAGOFPIECES = 'ADDBAGOFPIECES';
 export const RESETBAGOFPIECES = 'RESETBAGOFPIECES';
 export const HOLDPIECE = 'HOLDPIECE';
 export const ADDLOCKEDROWS = 'ADDLOCKEDROWS';
+export const SETGAMECONFIG = 'SETGAMECONFIG';
 
 export const initBoardState = () => ({
   type: INITBOARDSTATE,
@@ -55,3 +56,8 @@ export const addLockedRows = number => ({
   type: ADDLOCKEDROWS,
   numberOfRows: number,
 });
+
+export const setGameConfig = gameConfig => ({
+  type: SETGAMECONFIG,
+  gameConfig,
+})

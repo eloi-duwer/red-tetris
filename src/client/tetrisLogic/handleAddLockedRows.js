@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:49:42 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/12 19:46:36 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 02:29:43 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,38 @@ import { canMovePiece } from '../tetrisLogic/moveAndRotationPiece'
 const boardHeight = 30;
 const boardWidth = 10;
 
+const generateArrayOfNumbersToSkip = (nb, array) => {
+  if (nb === 0)
+    return array;
+  if (!array)
+    return generateArrayOfNumbersToSkip(nb, Array.from(Array(boardWidth), (e, i) => i));
+  const nbToSkip = Math.floor(Math.random() * array.length);
+  return generateArrayOfNumbersToSkip(nb - 1, [...array.slice(0, nbToSkip), ...array.slice(nbToSkip + 1)]);
+}
+
+const generateNewBoard = (boardState, nbOfBlocks, numberOfRows) => {
+  if (nbOfBlocks === boardWidth) {
+    return [
+      ...boardState.slice(numberOfRows),
+      ...Array.from(Array(Math.min(numberOfRows, boardHeight)), () => Array.from(Array(boardWidth), () => -1)),
+    ];
+  }
+  return boardState.map((line, i) => {
+    if (i < boardHeight - numberOfRows) {
+      return boardState[numberOfRows + i];
+    }
+    console.log(nbOfBlocks)
+    let arrayToSkip = generateArrayOfNumbersToSkip(nbOfBlocks);
+    return Array.from(Array(boardWidth), (e, i) => {
+      if (arrayToSkip.indexOf(i) !== -1)
+        return 0;
+      return -2;
+    })
+  })
+}
+
 const handleAddLockedRows = (state, numberOfRows) => {
-  const newBoard = [
-    ...state.boardState.slice(numberOfRows),
-    ...Array.from(Array(Math.min(numberOfRows, boardHeight)), () => Array.from(Array(boardWidth), () => -1)),
-  ];
+  const newBoard = generateNewBoard(state.boardState, state.nbBlocksByBlockedLine, numberOfRows);
 
   if (!state.piece) {
     return {};

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 04:17:55 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 21:37:19 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 01:15:44 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ OtherPlayersDisplayer.propTypes = {
 const mapStateToProps = (state) => ({
   ownId: state.socketReducer.id,
   playersInfo: state.socketReducer.playersInfo || {},
-  isGhost: true,
+  isGhost: state.tetrisReducer.ghostDisplay,
 });
 
 const mapDispatchToProps = () => ({});

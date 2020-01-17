@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 13:16:00 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/16 22:23:06 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { initBoardState } from '../actions/tetrisActions'
+import { saveTimeoutFunc } from '../actions/socketActions'
 
 import GameStarter from './GameStarter'
 
@@ -25,16 +26,12 @@ import HoldAndCommingNextDisplayer from '../components/HoldAndCommingNextDisplay
 import frameControl from '../tetrisLogic/frameControl'
 import keyDownControl from '../tetrisLogic/keyDownControl'
 
-const intervalUpdate = 750;
-
 const TetrisController = ({ gameStarted, points, ...props }) => {
 
-  const [intervalFunc, saveIntervalFunc] = useState(null);
-
   const stopGame = () => {
-    if (intervalFunc) {
-      clearInterval(intervalFunc);
-      saveIntervalFunc(null);
+    if (props.timeoutFunc) {
+      clearTimeout(props.timeoutFunc);
+      props.saveTimeoutFunc(undefined);
       document.body.removeEventListener('keydown', keyDownControl);
     }
   }
@@ -42,20 +39,13 @@ const TetrisController = ({ gameStarted, points, ...props }) => {
   useEffect(() => {
     if (gameStarted) {
       props.initBoardState();
-      saveIntervalFunc(setInterval(frameControl, intervalUpdate));
+      frameControl();
       document.body.addEventListener('keydown', keyDownControl);
     }
     else {
       stopGame();
     }
   }, [gameStarted]);
-
-  useEffect(() => {
-    if (intervalFunc && props.gameOver) {
-      stopGame();
-      props.socket.emit('gameOver', points);
-    }
-  }, [props.gameOver, gameStarted])
 
   return (
     <div style={{ height: '80%', display: 'flex', 'flexDirection': 'column', 'alignItems': 'flex-start' }}>
@@ -85,6 +75,7 @@ TetrisController.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   initBoardState: () => dispatch(initBoardState()),
+  saveTimeoutFunc: func => dispatch(saveTimeoutFunc(func)),
 });
 
 const mapStateToProps = (state) => ({
@@ -92,6 +83,7 @@ const mapStateToProps = (state) => ({
   gameStarted: Boolean(state.socketReducer.gameStarted),
   gameOver: state.tetrisReducer.gameOver || false,
   socket: state.socketReducer.socket,
+  timeoutFunc: state.socketReducer.timeoutFunc,
 });
 
 const TetrisControllerRedux = connect(

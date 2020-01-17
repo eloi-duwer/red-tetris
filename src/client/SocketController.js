@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   socketController.js                                :+:      :+:    :+:   */
+/*   SocketController.js                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 18:07:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 20:04:05 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 00:13:06 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ import {
   addBagOfPieces,
   resetBagOfPieces,
   addLockedRows,
+  setGameConfig,
 } from './actions/tetrisActions'
 
 function joinGameAndSetPseudo(reduxStore, socket) {
@@ -69,6 +70,7 @@ export default reduxStore => {
   socket.on('startGame', (startGameInfos) => {
     reduxStore.dispatch(setPlayersInfo(startGameInfos.listOfPlayers));
     reduxStore.dispatch(resetBagOfPieces(startGameInfos.firstBag));
+    reduxStore.dispatch(setGameConfig(startGameInfos.gameConfig));
     reduxStore.dispatch(setGameStarted(true));
   });
 

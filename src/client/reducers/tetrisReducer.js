@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:08 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 15:00:10 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 02:11:27 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ import {
   RESETBAGOFPIECES,
   HOLDPIECE,
   ADDLOCKEDROWS,
+  SETGAMECONFIG,
 } from '../actions/tetrisActions.js'
 
 import { canMovePiece, rotatePiece } from '../tetrisLogic/moveAndRotationPiece'
@@ -160,6 +161,18 @@ const tetrisReducer = (state = {}, action) => {
     return {
       ...state,
       ...handleAddLockedRows(state, action.numberOfRows),
+    }
+  }
+
+  case SETGAMECONFIG: {
+    const clamp = (x, min, max) => Math.max(min, Math.min(x, max));
+    const speed = (action.gameConfig.gameSpeed - 1) * (200 - 2000) / (100 - 1) + 2000;
+    console.log(action.gameConfig)
+    return {
+      ...state,
+      gameSpeed: clamp(speed, 30, 1500),
+      nbBlocksByBlockedLine: clamp(action.gameConfig.nbBlocksByBlockedLine || 10, 1, 10),
+      ghostDisplay: !!action.gameConfig.ghostDisplay
     }
   }
 
