@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 01:56:04 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:42:26 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ const heightOffset = 10;
 const numberOfLines = 20;
 const numberOfRows = 10;
 
+const lockedBlock = -1;
+const lockedBlock2 = -2;
+
 const colorSelecter = (tetrisCase, piecePlaces, i, j) => {
-  if (tetrisCase === -1 || tetrisCase === -2) { return 'black'; }
+  if (tetrisCase === lockedBlock || tetrisCase === lockedBlock2) { return 'black'; }
   if (tetrisCase !== 0) { return tetrisCase; }
   const place = piecePlaces.find(p => p.x === j && p.y === i);
   if (place) { return place.color; }
@@ -59,34 +62,43 @@ const getPiecesPlacesToPaint = (board, piece) => {
 }
 
 const TetrisDisplayer = ({ boardState, tetrisPiece, size, ...props }) => {
+  try {
+    const piecePlaceToPaint = getPiecesPlacesToPaint(boardState, tetrisPiece);
 
-  const piecePlaceToPaint = getPiecesPlacesToPaint(boardState, tetrisPiece);
+    const mainDivStyle = {
+      width: `${size * numberOfRows }px`,
+      minWidth: `${size * numberOfRows }px`,
+      height: `${size * numberOfLines }px`,
+      minHeight: `${size * numberOfLines }px`,
+      display: 'flex', flexWrap: 'wrap',
+      border: '2px solid black', borderRadius: '10px',
+      margin: '10px',
+      position: 'relative',
+    };
 
-  const mainDivStyle = {
-    width: `${size * numberOfRows }px`,
-    minWidth: `${size * numberOfRows }px`,
-    height: `${size * numberOfLines }px`,
-    minHeight: `${size * numberOfLines }px`,
-    display: 'flex', flexWrap: 'wrap',
-    border: '2px solid black', borderRadius: '10px',
-    margin: '10px',
-    position: 'relative',
-  };
-
-  return (<div className='TetrisDisplayer' style={mainDivStyle}>
-    {props.gameOver ?
-      <GameOverOverlay ownPlayer={props.ownPlayer} points={props.points} pseudo={props.pseudo}/> :
-      undefined
-    }
-    {boardState.slice(heightOffset).map((tetrisRow, i) =>
-      tetrisRow.map((tetrisCase, j) =>
-        <TetrisSquare color={colorSelecter(tetrisCase, piecePlaceToPaint, i, j)} key={String(i) + j} size={size}/>
-      ))}
-  </div>);
+    return (<div className='TetrisDisplayer' style={mainDivStyle}>
+      {props.gameOver || props.gameWinner ?
+        <GameOverOverlay
+          gameWinner={props.gameWinner}
+          ownPlayer={props.ownPlayer}
+          points={props.points}
+          pseudo={props.pseudo}
+        /> :
+        undefined
+      }
+      {boardState.slice(heightOffset).map((tetrisRow, i) =>
+        tetrisRow.map((tetrisCase, j) =>
+          <TetrisSquare color={colorSelecter(tetrisCase, piecePlaceToPaint, i, j)} key={String(i) + j} size={size}/>
+        ))}
+    </div>);
+  }
+  catch (e) {
+    return <div>Something went wrong...</div>
+  }
 }
 
 TetrisDisplayer.propTypes = {
-  boardState: PropTypes.array.isRequired,
+  boardState: PropTypes.arrayOf(PropTypes.array).isRequired,
   gameOver: PropTypes.bool.isRequired,
   ownPlayer: PropTypes.bool,
   points: PropTypes.number.isRequired,
@@ -101,6 +113,7 @@ const mapStateToProps = (state, props) => {
       boardState: state.tetrisReducer.boardState || emptyArray,
       tetrisPiece: state.tetrisReducer.piece || emptyObj,
       gameOver: state.tetrisReducer.gameOver || false,
+      gameWinner: state.tetrisReducer.gameWinner || false,
       points: state.tetrisReducer.points || 0,
     };
   }
@@ -109,6 +122,7 @@ const mapStateToProps = (state, props) => {
     boardState: playerInfo.boardState || emptyArray,
     tetrisPiece: playerInfo.piece || emptyObj,
     gameOver: playerInfo.gameOver || false,
+    gameWinner: playerInfo.gameWinner || false,
     points: playerInfo.points || 0,
     pseudo: playerInfo.pseudo,
   };

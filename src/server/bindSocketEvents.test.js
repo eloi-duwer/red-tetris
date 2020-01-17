@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 21:08:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:54:16 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 21:22:02 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ describe('Tests for bindSocketEvents', () => {
 
 	it('creates game', done => {
 		emitter.on('joinGame', game => {
-			expect(game.id).to.equal('42');
+			expect(+game.id).to.equal(+42);
 			done();
 		});
 		emitter.emit('tryToJoinGame', 42);

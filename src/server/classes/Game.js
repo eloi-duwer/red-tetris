@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:15:27 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 20:18:37 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:54:26 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Game {
       name: this.name,
       creator: this.creator.pseudo,
       playerList: this.playerList.map(p => p.pseudo),
-      gameAdmin: player ? this.creator.id === player.id: false,
+      gameAdmin: player ? this.creator.id === player.id : false,
       gameStarted: this.gameStarted,
     }
   }
@@ -40,7 +40,7 @@ class Game {
   removePlayer(player) {
     const index = this.playerList.findIndex(p => p.id === player.id);
     if (index >= 0) {
-      let removedPlayer = this.playerList.splice(index, 1)[0];
+      const removedPlayer = this.playerList.splice(index, 1)[0];
       if (this.playerList.length === 0) {
         gameManager.deleteGame(this.id);
         return;
@@ -48,6 +48,9 @@ class Game {
       if (removedPlayer === this.creator) {
         this.creator = this.playerList[0];
         this.playerList[0].socket.emit('newAdmin');
+      }
+      if (gameManager.io) {
+        player.socket.to(player.joinedGame.id).emit('updatePlayer', { id: player.id, gameOver: true });
       }
     }
   }

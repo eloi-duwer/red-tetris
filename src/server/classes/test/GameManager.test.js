@@ -6,14 +6,14 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 19:54:32 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 20:05:19 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:03:09 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import EventEmitter from 'events'
 
-import gameManager from './GameManager'
-import playerGenerator from './Player'
+import gameManager from '../GameManager'
+import playerGenerator from '../Player'
 
 describe('Tests for GameManager', () => {
 	let player;

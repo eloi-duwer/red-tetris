@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:36:30 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:29:14 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 21:18:09 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import tetrisReducer from './tetrisReducer'
+import tetrisReducer from '../tetrisReducer'
 
 import {
 	initBoardState,
@@ -21,7 +21,7 @@ import {
 	resetBagOfPieces,
 	holdPiece,
 	addLockedRows
-} from '../actions/tetrisActions'
+} from '../../actions/tetrisActions'
 
 describe('tets for tetrisReducer', () => {
 	let state = {piecesList: ['s', 'p', 'q', 'r']};

@@ -6,12 +6,12 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 21:34:02 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:30:22 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:24:29 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import { Provider } from 'react-redux';
-import OtherPlayersDisplayer from './OtherPlayersDisplayer';
+import OtherPlayersDisplayer from '../OtherPlayersDisplayer';
 
 describe('tests for OtherPlayersDisplayer', () => {
   it('renders OtherPlayersDisplayer and GhostDisplayer well', () => {
@@ -26,6 +26,9 @@ describe('tests for OtherPlayersDisplayer', () => {
           },
         },
       },
+      tetrisReducer: {
+        ghostDisplay: true
+      }
     });
 
     const component = render(<Provider store={store}><OtherPlayersDisplayer /></Provider>);
@@ -47,6 +50,9 @@ describe('tests for OtherPlayersDisplayer', () => {
           },
         },
       },
+      tetrisReducer: {
+        ghostDisplay: true,
+      }
     });
 
     const component = render(<Provider store={store}><OtherPlayersDisplayer /></Provider>);

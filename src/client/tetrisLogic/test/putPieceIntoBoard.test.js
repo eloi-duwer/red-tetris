@@ -6,12 +6,12 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 15:42:00 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:28:20 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:02:31 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import putPieceIntoBoard from './putPieceIntoBoard'
-import pieces from './tetrisPieces'
+import putPieceIntoBoard from '../putPieceIntoBoard'
+import pieces from '../tetrisPieces'
 
 describe('Tests for putPieceIntoBoard', () => {
 	it('works', () => {

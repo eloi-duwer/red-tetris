@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:32 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 18:16:21 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:43:19 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ const App = (props) => {
 
   const [pseudo, setPseudo] = useState(props.pseudo || '');
 
-    useEffect(() => {
-      setPseudo(props.pseudo)
-    }, [props.pseudo]);
+  useEffect(() => {
+    setPseudo(props.pseudo || 'Unknown')
+  }, [props.pseudo]);
 
   const changePseudo = () => {
-    props.setPseudo(pseudo);
-    props.socket.emit('changePseudo', pseudo)
+    props.setPseudo(pseudo || 'Unknown');
+    props.socket.emit('changePseudo', pseudo || 'Unknown')
   }
 
   return (
     <div style={{ position: 'absolute', top: 0, height: '100vh', left: 0, width: '100vw' }}>
-      <span style={{ display: 'block' }}>Red tetris, le tetris 99 du pécé</span>
-      <input onChange={e => setPseudo(e.target.value)} placeholder='pseudo' value={pseudo || ''} type='text' />
-      <button onClick={changePseudo}>valider</button>
+      <span style={{ display: 'block' }}>Red tetris, The Tetris 99 for PC G@m3rs</span>
+      pseudo:<input onChange={e => setPseudo(e.target.value)} placeholder='pseudo' type='text' value={pseudo || ''} />
+      <button onClick={changePseudo}>change pseudo</button>
       {props.isGameSelected ?
         <TetrisController /> :
         <GameSelector />
@@ -47,6 +47,8 @@ const App = (props) => {
 
 App.propTypes = {
   isGameSelected: PropTypes.bool,
+  pseudo: PropTypes.string,
+  setPseudo: PropTypes.func.isRequired,
   socket: PropTypes.object,
 }
 

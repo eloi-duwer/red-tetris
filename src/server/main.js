@@ -6,13 +6,14 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:35:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/16 19:54:23 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:56:18 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import http from 'http';
 import socketIo from 'socket.io';
 import fs from 'fs';
+import path from 'path'
 
 import conf from '../../conf'
 
@@ -23,35 +24,36 @@ import gameManager from './classes/GameManager'
 
 import bindSocketEvents from './bindSocketEvents'
 
-gameManager.io = io;
-
-const games = [];
+const codeErr = 500;
+const codeOk = 200;
 
 if (process.env.NODE_ENV === 'production') {
   app.on('request', (req, res) => {
     const file = req.url === '/bundle.js' ? '/../../build/bundle.js' : '/../../index.html';
-    fs.readFile(__dirname + file, 'utf8',  (err, data) => {
+    fs.readFile(path.join(__dirname, file), 'utf8', (err, data) => {
       if (err) {
         console.error(err);
-        res.writeHead(500);
+        res.writeHead(codeErr);
         return res.end('Error loading file');
       }
-      res.writeHead(200);
+      res.writeHead(codeOk);
       return res.end(data);
     })
   })
 }
 
-app.listen({host: conf.host, port: conf.port});
-console.log('Server listening on ' + conf.url);
+app.listen({ host: conf.host, port: conf.port });
+console.log(`Server listening on ${ conf.url}`);
 
 const io = socketIo(app, {
 
-  //probleme sinon quand chrome est en arriere-plan / afk
+  // probleme sinon quand chrome est en arriere-plan / afk
   pingTimeout: 60000,
 });
 
+gameManager.setIo(io);
+
 io.on('connection', socket => {
-  let player = playerGenerator.createPlayer(io, socket);
+  const player = playerGenerator.createPlayer(io, socket);
   bindSocketEvents(io, socket, player);
 });

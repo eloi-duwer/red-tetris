@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:49:42 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 02:29:43 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:51:56 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@ import { canMovePiece } from '../tetrisLogic/moveAndRotationPiece'
 const boardHeight = 30;
 const boardWidth = 10;
 
+const lockedBlock = -2;
+
 const generateArrayOfNumbersToSkip = (nb, array) => {
-  if (nb === 0)
-    return array;
-  if (!array)
-    return generateArrayOfNumbersToSkip(nb, Array.from(Array(boardWidth), (e, i) => i));
+  if (nb === 0) { return array; }
+  if (!array) { return generateArrayOfNumbersToSkip(nb, Array.from(Array(boardWidth), (e, i) => i)); }
   const nbToSkip = Math.floor(Math.random() * array.length);
   return generateArrayOfNumbersToSkip(nb - 1, [...array.slice(0, nbToSkip), ...array.slice(nbToSkip + 1)]);
 }
 
-const generateNewBoard = (boardState, nbOfBlocks, numberOfRows) => {
+const generateNewBoard = (boardState, nbOfBlocks = boardWidth, numberOfRows) => {
   if (nbOfBlocks === boardWidth) {
     return [
       ...boardState.slice(numberOfRows),
@@ -35,12 +35,10 @@ const generateNewBoard = (boardState, nbOfBlocks, numberOfRows) => {
     if (i < boardHeight - numberOfRows) {
       return boardState[numberOfRows + i];
     }
-    console.log(nbOfBlocks)
-    let arrayToSkip = generateArrayOfNumbersToSkip(nbOfBlocks);
+    const arrayToSkip = generateArrayOfNumbersToSkip(nbOfBlocks);
     return Array.from(Array(boardWidth), (e, i) => {
-      if (arrayToSkip.indexOf(i) !== -1)
-        return 0;
-      return -2;
+      if (arrayToSkip.indexOf(i) !== -1) { return 0; }
+      return lockedBlock;
     })
   })
 }

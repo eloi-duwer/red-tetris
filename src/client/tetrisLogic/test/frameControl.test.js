@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 14:35:28 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:29:04 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:27:00 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import frameControl from './frameControl'
+import { frameControl, frameControlWithTimeout, __RewireAPI__ as rewireApi } from '../frameControl'
 import EventEmitter from 'events'
 
 describe('Tests for frameControl', () => {
@@ -27,16 +27,20 @@ describe('Tests for frameControl', () => {
 			piecesList: ['s', 'o'],
 			nbRowsCleared: 42,
 			boardState: boardState,
-			piece: 'abc'
+			piece: 'abc',
+			ghostDisplay: true,
 		},
 		socketReducer: {
 			socket: emitter,
+			playersInfo: {
+				1: { gameOver: true }
+			}
 		}
 	};
 
 	const mocked = mockStore(state);
 
-	frameControl.__Rewire__('store', mocked);
+	rewireApi.__Rewire__('store', mocked);
 
 	let updatePlayer = null;
 	let getNextBag = false;

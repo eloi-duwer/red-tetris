@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:28:17 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 21:37:54 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 21:10:55 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,27 @@ const GameSelector = ({ socket, ...props }) => {
 
   return (
     <div className='GameSelector'>
-			Quelle partie souhaitez-vous rejoindre?
+			Which game do you want to join?
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
         {props.gameList.map((game, i) => <div className='oneGame' key={i} style={boxStyle}>
-          <div>nom: {game.name}</div>
-          <div>créateur: {game.creator}</div>
-          <div>Nb de joueurs: {game.playerList.length}</div>
-          <button onClick={() => joinGame(game.id)}>Rejoindre</button>
+          <div>name: {game.name}</div>
+          <div>creator: {game.creator}</div>
+          <div>Number of players: {game.playerList.length}</div>
+          <button onClick={() => joinGame(game.id)}>Join</button>
         </div>)}
         <div id='createGame' style={{
           ...boxStyle,
           display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center',
         }}>
-          <div>Creer une partie</div>
+          <div style={{ margin: '5px' }}>Create a game</div>
           <input
             onChange={ev => setNewGameName(ev.target.value)}
-            placeholder='nom de la partie'
+            placeholder='Name of the game'
+            style={{ margin: '5px' }}
             type='text'
             value={newGameName}
           />
-          <button onClick={() => createGame(newGameName)}>Creer la partie</button>
+          <button onClick={() => createGame(newGameName)} style={{ margin: '5px' }}>Create the game</button>
         </div>
       </div>
     </div>

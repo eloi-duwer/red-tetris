@@ -6,13 +6,13 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 14:52:33 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:28:45 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:02:16 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import handleAddLockedRows from './handleAddLockedRows'
+import handleAddLockedRows from '../handleAddLockedRows'
 
-import tetrisPieces from './tetrisPieces'
+import tetrisPieces from '../tetrisPieces'
 
 describe('tests for handleAddLockedRows', () => {
 	const board = new Array(30).fill(new Array(10).fill(0));

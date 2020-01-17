@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 19:26:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:45:26 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:03:13 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import playerGenerator from './Player'
+import playerGenerator from '../Player'
 
 describe('Tests for Player and PlayerGenerator', () => {
 

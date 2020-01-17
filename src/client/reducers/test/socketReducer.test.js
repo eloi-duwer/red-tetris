@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:22:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:29:21 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:18:54 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import socketReducer from './socketReducer.js'
+import socketReducer from '../socketReducer.js'
 
 import {
 	setGameList,
@@ -21,7 +21,7 @@ import {
 	setPlayersInfo,
 	updatePlayerInfo,
 	setPseudo
-} from '../actions/socketActions.js'
+} from '../../actions/socketActions.js'
 
 describe('tests fom socketReducer.js', () => {
 
@@ -47,7 +47,7 @@ describe('tests fom socketReducer.js', () => {
 
 	it('sets game', () => {
 		let res = socketReducer(state, setGame(obj));
-		expect(res).to.deep.equal({game: obj});
+		expect(res.game).to.deep.equal(obj);
 	});
 
 	it('sets gameStarted', () => {

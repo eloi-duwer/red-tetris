@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:47:16 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:29:30 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:22:54 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import TetrisControllerRedux from './TetrisController'
+import TetrisControllerRedux from '../TetrisController'
 import EventEmitter from 'events'
 
 let emitter = new EventEmitter();
@@ -35,7 +35,7 @@ describe('Test for TetrisController', () => {
 
 	before(() => {
 		TetrisControllerRedux.__Rewire__('useEffect', mockUseEffect);
-		TetrisControllerRedux.__Rewire__('frameControl', () => {});
+		TetrisControllerRedux.__Rewire__('frameControlWithTimeout', () => {});
 		TetrisController = TetrisControllerRedux.__GetDependency__('TetrisController');
 	})
 
@@ -52,12 +52,10 @@ describe('Test for TetrisController', () => {
 
 	});
 
-	it('emits gameOver', done => {
-		emitter.on('gameOver', points => {
-			expect(points).to.equal(100);
+	it('quits the game', done => {
+		emitter.on('quitGame', () => {
 			done();
 		})
-		wrapper.setProps({gameOver: true});
-		wrapper.setProps({gameStarted: false});
+		wrapper.find('button').simulate('click');
 	})
 })

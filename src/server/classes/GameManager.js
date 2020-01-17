@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:51:47 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:52:20 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:53:54 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ import Game from './Game'
 class GameManager {
   constructor() {
     this.games = {};
-		this.io = null;
+    this.io = null;
   }
 
   createGame(player, name, randomPieceGenerator) {
@@ -24,24 +24,27 @@ class GameManager {
       return this.games[name];
     }
     let nb = 1;
-    let newName = name + '(' + nb + ')'
+    let newName = `${name }(${ nb })`
     while (this.games[newName]) {
-      newName = name + '(' + nb + ')';
+      newName = `${name }(${ nb })`;
       nb = nb + 1;
     }
-    let game = new Game(newName, player, randomPieceGenerator);
+    const game = new Game(newName, player, randomPieceGenerator);
     this.games[newName] = game;
     return game;
   }
 
   deleteGame(id) {
-    delete this.games[id];
-		if (this.io)
-			this.io.emit('gameList', this.getGames());
+    this.games[id] = undefined;
+    if (this.io) { this.io.emit('gameList', this.getGames()); }
   }
 
   getGames(player) {
     return Object.keys(this.games).map(id => this.games[id].toSend(player));
+  }
+
+  setIo(io) {
+    this.io = io;
   }
 
 }

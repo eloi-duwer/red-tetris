@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 11:36:47 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:30:47 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 17:59:44 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ import {
 	SETPLAYERSINFO,
 	updatePlayerInfo,
 	UPDATEPLAYERINFO
-} from './socketActions';
+} from '../socketActions';
 
 describe('Tests for socketActions', () => {
 		let tests = [

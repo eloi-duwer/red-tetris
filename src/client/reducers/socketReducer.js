@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:48:33 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 00:26:44 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 20:20:44 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ import {
 } from '../actions/socketActions.js'
 
 function changeHashGame(game) {
-  let args = window.location.href.split('/').slice(-1)[0] || '';
-  let oldPseudo = ((args.split('#')[1] || '').split('[')[1] || '').split(']')[0] || '';
-  window.location.replace('#' + game + (oldPseudo ? '[' + oldPseudo + ']' : ''));
+  const args = window.location.href.split('/').slice(-1)[0] || '';
+  const oldPseudo = ((args.split('#')[1] || '').split('[')[1] || '').split(']')[0] || '';
+  window.location.replace(`#${ game }${oldPseudo ? `[${ oldPseudo }]` : ''}`);
 }
 
 function changeHashPseudo(pseudo) {
-  let args = window.location.href.split('/').slice(-1)[0] || '';
-  let oldGame = (args.split('#')[1] || '').split('[')[0] || '';
-  window.location.replace('#' + oldGame + '[' + pseudo + ']');
+  const args = window.location.href.split('/').slice(-1)[0] || '';
+  const oldGame = (args.split('#')[1] || '').split('[')[0] || '';
+  window.location.replace(`#${ oldGame }[${ pseudo }]`);
 }
 
 const socketReducer = (state = {}, action) => {
@@ -55,20 +55,23 @@ const socketReducer = (state = {}, action) => {
     }
 
   case SETGAME:
-    changeHashGame(action.game.id);
+    if (action.game) {
+      changeHashGame(action.game.id);
+    }
     return {
       ...state,
       game: action.game,
+      gameStarted: false,
     }
 
   case NEWGAMEADMIN:
-      return {
-        ...state,
-        game: {
-          ...state.game,
-          gameAdmin: true,
-        }
-      }
+    return {
+      ...state,
+      game: {
+        ...state.game,
+        gameAdmin: true,
+      },
+    }
 
   case SETGAMESTARTED:
     return {
@@ -88,7 +91,7 @@ const socketReducer = (state = {}, action) => {
       playersInfo: {
         ...state.playersInfo,
         [action.newPlayerInfo.id]: {
-          ...state.playersInfo[action.newPlayerInfo.id],
+          ...(state.playersInfo || {})[action.newPlayerInfo.id],
           ...action.newPlayerInfo,
         },
       },

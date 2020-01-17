@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:05:49 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:27:57 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:15:11 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ import {
   addBagOfPieces,
   resetBagOfPieces,
   addLockedRows,
+	setGameConfig,
 } from './actions/tetrisActions'
 
 import EventEmitter from 'events';
@@ -76,7 +77,7 @@ describe('Tests for socketController', () => {
 	});
 
 	it('store recieves startGame actions', done => {
-		let expected = [setPlayersInfo(arrayTest), resetBagOfPieces(arrayTest), setGameStarted(true)];
+		let expected = [setPlayersInfo(arrayTest), resetBagOfPieces(arrayTest), setGameConfig("coucou"), setGameStarted(true)];
 
 		unsubscribe = store.subscribe(() => {
 			let actions = store.getActions();
@@ -86,7 +87,7 @@ describe('Tests for socketController', () => {
 				done();
 		});
 
-		emitter.emit('startGame', {listOfPlayers: arrayTest, firstBag: arrayTest});
+		emitter.emit('startGame', {listOfPlayers: arrayTest, firstBag: arrayTest, gameConfig: 'coucou'});
 	});
 
 })

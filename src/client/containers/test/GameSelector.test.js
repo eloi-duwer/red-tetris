@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:46:20 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:29:51 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:01:04 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import GameSelectorRedux from './GameSelector'
+import GameSelectorRedux from '../GameSelector'
 import EventEmitter from 'events'
 
 const GameSelector = GameSelectorRedux.__GetDependency__('GameSelector');

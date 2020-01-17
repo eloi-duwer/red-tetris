@@ -6,12 +6,12 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 21:14:41 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:30:30 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:00:22 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import { Provider } from 'react-redux';
-import HoldAndCommingNextDisplayer from './HoldAndCommingNextDisplayer';
+import HoldAndCommingNextDisplayer from '../HoldAndCommingNextDisplayer';
 
 describe('Tests for HoldAndCommingNextDisplayer and OnePieceDisplayer', () => {
 

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 00:42:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 02:07:58 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:48:41 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import GameParametrer from './GameParametrer'
+
+const defaultSpeed = 20;
+const defaultAllBlocks = 10;
 
 const GameStarter = (props) => {
 
@@ -28,9 +31,9 @@ const GameStarter = (props) => {
       buttonRef.current.blur();
     }
     props.socket.emit('tryToStartGame', {
-      'gameSpeed': (gameSpeedRef.current || {}).value || 20,
-      'nbBlocksByBlockedLine': (nbBlocksRef.current || {}).value || 10,
-      'ghostDisplay': (ghostDisplayerRef.current || {}).checked
+      'gameSpeed': (gameSpeedRef.current || {}).value || defaultSpeed,
+      'nbBlocksByBlockedLine': (nbBlocksRef.current || {}).value || defaultAllBlocks,
+      'ghostDisplay': (ghostDisplayerRef.current || {}).checked,
     });
   }
 
@@ -44,15 +47,15 @@ const GameStarter = (props) => {
         <div>
           <button
             onClick={props.gameStarted ? stopGame : startGame } ref={buttonRef}
-          >{props.gameStarted ? 'Arrêter' : 'Commencer'} la partie</button>
+          >{props.gameStarted ? 'Stop' : 'Begin'}  the game</button>
           {props.gameStarted ? undefined : <GameParametrer
             gameSpeedRef={gameSpeedRef}
-            nbBlocksRef={nbBlocksRef}
             ghostDisplayerRef={ghostDisplayerRef}
+            nbBlocksRef={nbBlocksRef}
           />}
         </div> :
         <div>
-          {props.gameStarted ? '' : 'Attendez que l\'administarteur lance la partie'}
+          {props.gameStarted ? '' : 'Only the game admin can start the game'}
         </div>
       }
     </div>

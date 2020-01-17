@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:39:37 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 15:29:28 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 15:12:36 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ import PropTypes from 'prop-types'
 
 import OnePieceDisplayer from './OnePieceDisplayer'
 
-const numberOfPiecesToShow = 3
+const numberOfPiecesToShow = 6
 
 const HoldAndCommingNextDisplayer = (props) => <div
   className='HoldAndCommingNextDisplayer'

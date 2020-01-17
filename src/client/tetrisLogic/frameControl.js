@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:19:48 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 01:19:11 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:51:18 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 import { store } from '../store'
 
-import { nextFrame } from '../actions/tetrisActions'
+import { nextFrame, setGameWinner } from '../actions/tetrisActions'
 import { saveTimeoutFunc } from '../actions/socketActions'
 
 const heightGhostBoard = 20;
@@ -22,17 +22,20 @@ const widthGhostBoard = 10;
 const initialGhostBoard = Array.from(Array(widthGhostBoard), () => heightGhostBoard);
 
 const offSetToGhostBoard = 10;
-const criticalNumberOfPieces = 4;
+const criticalNumberOfPieces = 7;
 const minimalNbOfRowsToSend = 2;
 
-const boardStateToSend = (boardState, isGhost ) => {
+const boardStateToSend = (boardState, isGhost) => {
   if (!isGhost) { return boardState; }
 
   return boardState.reduce((acc, val, i) => val.reduce((acc2, val2, j) => [
-    ...acc2, val2 !== 0 && i - offSetToGhostBoard < acc[j] ? i - offSetToGhostBoard : acc[j]], []), initialGhostBoard);
+    ...acc2,
+    val2 !== 0 && i - offSetToGhostBoard < acc[j] ?
+      i - offSetToGhostBoard :
+      acc[j]], []), initialGhostBoard);
 }
 
-const frameControl = () => {
+export const frameControl = () => {
   store.dispatch(nextFrame());
   const state = store.getState(),
     points = state.tetrisReducer.points,
@@ -55,13 +58,26 @@ const frameControl = () => {
   if (nbRowsCleared >= minimalNbOfRowsToSend) {
     socket.emit('addLockedRows', nbRowsCleared - 1);
   }
-
-  if (!gameOver) {
-    store.dispatch(saveTimeoutFunc(setTimeout(frameControl, gameSpeed)));
-  }
-  else {
+  if (gameOver) {
     socket.emit('gameOver', points);
   }
+
+  if (Object.keys(state.socketReducer.playersInfo).length > 1 &&
+    Object.keys(state.socketReducer.playersInfo).every(id => {
+      if (Number(id) === Number(state.socketReducer.id)) { return true; }
+      return (state.socketReducer.playersInfo[id] || {}).gameOver === true;
+    })) {
+    store.dispatch(setGameWinner());
+    socket.emit('updatePlayer', { gameWinner: true });
+    return { gameOver: true };
+  }
+
+  return { gameOver, gameSpeed };
 }
 
-export default frameControl;
+export const frameControlWithTimeout = () => {
+  const { gameOver, gameSpeed } = frameControl();
+  if (!gameOver) {
+    store.dispatch(saveTimeoutFunc(setTimeout(frameControlWithTimeout, gameSpeed)));
+  }
+}

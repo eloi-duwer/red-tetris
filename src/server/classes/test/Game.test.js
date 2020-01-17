@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 20:06:21 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 20:24:33 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:03:04 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import Game from './Game'
+import Game from '../Game'
 
 describe('Tests for class Game', () => {
 	let game;

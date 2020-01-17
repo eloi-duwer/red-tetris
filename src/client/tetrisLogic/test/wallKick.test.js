@@ -6,14 +6,14 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:01:43 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:49:24 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:02:37 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import wallKick from './wallKick'
+import wallKick from '../wallKick'
 
-import pieces from './tetrisPieces'
-import {rotatePiece} from './moveAndRotationPiece'
+import pieces from '../tetrisPieces'
+import {rotatePiece} from '../moveAndRotationPiece'
 
 describe('Tests for wallKick', () => {
 	let emptyBoard = tetrisReducer.boardState;

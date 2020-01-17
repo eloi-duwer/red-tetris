@@ -6,13 +6,13 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:33:59 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:33:21 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 21:17:26 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import AppRedux from './App'
+import AppRedux from '../App'
 import EventEmitter from 'events'
-import TetrisController from './TetrisController'
+import TetrisController from '../TetrisController'
 
 const App = AppRedux.__GetDependency__('App');
 

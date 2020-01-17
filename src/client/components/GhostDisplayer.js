@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 17:04:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/08 22:10:47 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:40:49 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ const boardWidth = 10;
 
 const arrayLoop = Array.from(Array(boardHeight), () => Array.from(Array(boardWidth), () => {}));
 
-const GhostDisplayer = ({ boardState, gameOver, size, points, pseudo }) => (
+const GhostDisplayer = ({ boardState, gameOver, size, points, pseudo, gameWinner }) => (
   <div className='GhostDisplayer' style={{
     width: `${size * boardWidth }px`,
     height: `${size * boardHeight }px`,
@@ -33,8 +33,11 @@ const GhostDisplayer = ({ boardState, gameOver, size, points, pseudo }) => (
     borderRadius: '5px',
     position: ' relative',
   }}>
-    {gameOver ? <GameOverOverlay ownPlayer={false} points={points} pseudo={pseudo}/> : undefined}
-    {boardState ?
+    {gameOver || gameWinner ?
+      <GameOverOverlay gameWinner={gameWinner} ownPlayer={false} points={points} pseudo={pseudo}/> :
+      undefined
+    }
+    {boardState && boardState.length ?
       arrayLoop.map((row, i) => row.map((useless, j) =>
         <TetrisSquare
           color={i === boardState[j] ?
@@ -55,6 +58,7 @@ const GhostDisplayer = ({ boardState, gameOver, size, points, pseudo }) => (
 GhostDisplayer.propTypes = {
   boardState: PropTypes.array,
   gameOver: PropTypes.bool.isRequired,
+  gameWinner: PropTypes.bool,
   points: PropTypes.number.isRequired,
   pseudo: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
@@ -65,6 +69,7 @@ const mapStateToProps = (state, props) => {
   return {
     boardState: playerInfo.boardState,
     gameOver: playerInfo.gameOver || false,
+    gameWinner: playerInfo.gameWinner || false,
     points: playerInfo.points || 0,
     pseudo: playerInfo.pseudo,
   };

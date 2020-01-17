@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 18:07:06 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 00:13:06 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 20:37:50 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,18 @@ import {
 } from './actions/tetrisActions'
 
 function joinGameAndSetPseudo(reduxStore, socket) {
-  let splitUrl = window.location.href.split('/');
+  const splitUrl = window.location.href.split('/');
   const params = splitUrl[splitUrl.length - 1];
-  if(!params) {
+  if (!params) {
     return;
   }
   const gameName = (params.split('#')[1] || '').split('[')[0];
   if (gameName) {
-    socket.emit('joinGame', gameName);
+    socket.emit('tryToJoinGame', decodeURI(gameName));
   }
-  const pseudo = (params.split('[')[1] || '').split(']')[0];
-  if (pseudo) {
-    reduxStore.dispatch(setPseudo(pseudo));
-    socket.emit('changePseudo', pseudo);
-  }
+  const pseudo = (params.split('[')[1] || '').split(']')[0] || 'unknown';
+  reduxStore.dispatch(setPseudo(pseudo));
+  socket.emit('changePseudo', pseudo);
 
 }
 

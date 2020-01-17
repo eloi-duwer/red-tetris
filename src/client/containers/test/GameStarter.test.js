@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:24:20 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:29:41 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:01:11 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import GameStarterRedux from './GameStarter'
+import GameStarterRedux from '../GameStarter'
 import EventEmitter from 'events'
 
 const GameStarter = GameStarterRedux.__GetDependency__('GameStarter');

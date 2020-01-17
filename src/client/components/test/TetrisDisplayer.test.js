@@ -6,12 +6,12 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:53:45 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:30:13 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:00:29 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import { Provider } from 'react-redux';
-import TetrisDisplayerRedux from './TetrisDisplayer'
+import TetrisDisplayerRedux from '../TetrisDisplayer'
 
 describe('Test for TetrisDisplayer and GameOverOverlay', () => {
 

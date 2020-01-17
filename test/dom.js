@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:09:22 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/10 18:58:40 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:33:35 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ global.document = window.document;
 global.navigator = {
   userAgent: 'node.js',
 };
+global.setTimeout = () => {}
 copyProps(window, global);

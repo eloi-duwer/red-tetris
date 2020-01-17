@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:08 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 02:11:27 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 20:56:42 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ import {
   HOLDPIECE,
   ADDLOCKEDROWS,
   SETGAMECONFIG,
+  SETKEYDOWN,
+  SETGAMEWINNER,
 } from '../actions/tetrisActions.js'
 
 import { canMovePiece, rotatePiece } from '../tetrisLogic/moveAndRotationPiece'
@@ -62,11 +64,15 @@ const tetrisReducer = (state = {}, action) => {
       piecesList: state.piecesList.slice(1),
       points: 0,
       gameOver: false,
+      gameWinner: false,
       canHoldPiece: true,
       heldPiece: null,
     };
 
   case NEXTFRAME: {
+    if (!state.piece) {
+      return state;
+    }
     const tryPos = { x: state.piece.pos.x, y: state.piece.pos.y + 1 };
     if (canMovePiece(state.boardState, state.piece.piece, tryPos)) {
       return {
@@ -166,15 +172,30 @@ const tetrisReducer = (state = {}, action) => {
 
   case SETGAMECONFIG: {
     const clamp = (x, min, max) => Math.max(min, Math.min(x, max));
-    const speed = (action.gameConfig.gameSpeed - 1) * (200 - 2000) / (100 - 1) + 2000;
-    console.log(action.gameConfig)
+    const speed = (action.gameConfig.gameSpeed - 1) * (200 - 1000) / (100 - 1) + 1000;
     return {
       ...state,
       gameSpeed: clamp(speed, 30, 1500),
       nbBlocksByBlockedLine: clamp(action.gameConfig.nbBlocksByBlockedLine || 10, 1, 10),
-      ghostDisplay: !!action.gameConfig.ghostDisplay
+      ghostDisplay: Boolean(action.gameConfig.ghostDisplay),
     }
   }
+
+  case SETKEYDOWN: {
+    return {
+      ...state,
+      keysDown: {
+        ...state.keysDown,
+        [action.key]: action.status,
+      },
+    }
+  }
+
+  case SETGAMEWINNER:
+    return {
+      ...state,
+      gameWinner: true,
+    }
 
   default:
     return state;

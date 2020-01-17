@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 14:25:37 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:49:19 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:01:58 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import checkTetris from './checkTetris'
+import checkTetris from '../checkTetris'
 
 describe('Test for checkTetris', () => {
 	const empty = new Array(25).fill(new Array(10).fill(0));

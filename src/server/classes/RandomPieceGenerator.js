@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:49:55 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:24:23 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 22:56:33 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ class RandomPieceGenerator {
       indexToGet = 1;
     }
     if (this.bags[indexToGet] === undefined) { this.bags[indexToGet] = new BagOfPieces(); }
-    this.ids[playerId] += 1;
+    this.ids[playerId] = this.ids[playerId] + 1;
     return this.bags[indexToGet].toSend();
   }
 

@@ -6,12 +6,12 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:20:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:30:06 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:00:33 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React from 'react'
-import TetrisSquare from './TetrisSquare'
+import TetrisSquare from '../TetrisSquare'
 
 describe('One tetris square (piece or empty)', () => {
   let component = shallow(<TetrisSquare color='black' size={5} />);

@@ -6,11 +6,11 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 18:50:58 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:27:28 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 18:03:17 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import RandomPieceGenerator from './RandomPieceGenerator'
+import RandomPieceGenerator from '../RandomPieceGenerator'
 
 describe('Tests for the class RandomPieceGenerator', () => {
 	let rpg;

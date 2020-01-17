@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 11:48:58 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/13 19:30:41 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/17 17:59:49 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ import {
 	HOLDPIECE,
 	addLockedRows,
 	ADDLOCKEDROWS,
-} from './tetrisActions';
+} from '../tetrisActions';
 
 describe('Tests for tetrisActions', () => {
 		let tests = [
