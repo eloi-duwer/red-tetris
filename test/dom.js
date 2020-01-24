@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:09:22 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 22:33:35 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:38:23 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ function copyProps(src, target) {
 
 global.window = window;
 global.document = window.document;
+global.clipBoard = ''
 global.navigator = {
+  text: '',
   userAgent: 'node.js',
+  clipboard: {writeText: arg => global.clipBoard = arg},
 };
 global.setTimeout = () => {}
 copyProps(window, global);

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:47:16 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 22:22:54 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:38:51 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,15 @@ describe('Test for TetrisController', () => {
 
 	});
 
+	it('copy the game url', () => {
+		wrapper.find('#copyName').simulate('click');
+		expect(clipBoard).to.not.equal('');
+	})
+
 	it('quits the game', done => {
 		emitter.on('quitGame', () => {
 			done();
 		})
-		wrapper.find('button').simulate('click');
+		wrapper.find('#quitGame').simulate('click');
 	})
 })

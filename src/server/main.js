@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:35:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 22:56:18 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 16:45:12 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen({ host: conf.host, port: conf.port });
-console.log(`Server listening on ${ conf.url}`);
+console.log(`Server listening on ${ conf.url }`);
 
 const io = socketIo(app, {
 

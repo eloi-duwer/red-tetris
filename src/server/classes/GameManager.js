@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:51:47 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 22:53:54 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 17:01:06 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ class GameManager {
       return this.games[name];
     }
     let nb = 1;
-    let newName = `${name }(${ nb })`
+    let newName = `${ name }(${ nb })`
     while (this.games[newName]) {
-      newName = `${name }(${ nb })`;
+      newName = `${ name }(${ nb })`;
       nb = nb + 1;
     }
     const game = new Game(newName, player, randomPieceGenerator);
@@ -35,7 +35,7 @@ class GameManager {
   }
 
   deleteGame(id) {
-    this.games[id] = undefined;
+    Reflect.deleteProperty(this.games, id);
     if (this.io) { this.io.emit('gameList', this.getGames()); }
   }
 

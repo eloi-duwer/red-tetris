@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 17:04:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 22:40:49 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 17:49:41 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ const mapStateToProps = (state, props) => {
     gameOver: playerInfo.gameOver || false,
     gameWinner: playerInfo.gameWinner || false,
     points: playerInfo.points || 0,
-    pseudo: playerInfo.pseudo,
+    pseudo: playerInfo.pseudo || 'unknown',
   };
 };
 

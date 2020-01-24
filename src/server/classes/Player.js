@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:18:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/16 19:54:01 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:09:40 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ class Player {
     this.socket = socket
     this.roomId = roomId;
     this.joinedGame = joinedGame;
+    this.playing = false;
   }
 
   joinGame(game) {

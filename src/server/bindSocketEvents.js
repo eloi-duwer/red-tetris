@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:18:41 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 20:42:44 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:12:09 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,10 @@ export default function bindSocketEvents(io, socket, player) {
   socket.on('tryToJoinGame', id => {
     const game = gameManager.games[id];
 
-    // Envoyer un message si game pas valide ?
     if (!game) { return createGame(id) }
     player.joinGame(game);
     socket.join(id);
     socket.emit('joinGame', game.toSend(player));
-
-    // console.log(`player ${player.pseudo} joined room ${game.id}`);
   });
 
   socket.on('quitGame', () => {
@@ -45,20 +42,18 @@ export default function bindSocketEvents(io, socket, player) {
   })
 
   socket.on('disconnect', () => {
-    // console.log(`player ${player.pseudo} quitted his game`);
     player.quitGame();
   });
 
   socket.on('changePseudo', pseudo => {
     player.pseudo = pseudo;
-
-    // console.log(`player ${player.id} changed pseudo to ${pseudo}`)
   });
 
   socket.on('tryToStartGame', gameConfig => {
     if (!player.joinedGame) { return; }
     const firstBag = player.joinedGame.randomPieceGenerator.resetBeforeStart();
     player.joinedGame.gameStarted = true;
+    player.joinedGame.playerList.forEach(player => player.playing = true);
     io.in(player.joinedGame.id).emit('startGame', {
       listOfPlayers: player.joinedGame.playerList
         .map(p => p.toSend())
@@ -71,6 +66,7 @@ export default function bindSocketEvents(io, socket, player) {
   socket.on('stopGame', () => {
     if (!player.joinedGame) { return; }
     player.joinedGame.gameStarted = false;
+    player.joinedGame.playerList.forEach(player => player.playing = false);
     io.in(player.joinedGame.id).emit('stopGame');
   });
 
@@ -81,9 +77,8 @@ export default function bindSocketEvents(io, socket, player) {
 
   socket.on('gameOver', finalPoints => {
     if (!player.joinedGame) { return; }
+    player.playing = false;
     io.in(player.joinedGame.id).emit('updatePlayer', { id: player.id, gameOver: true, points: finalPoints });
-
-    // console.log(`${player.pseudo} a fini sa partie avec ${finalPoints} points`);
   });
 
   socket.on('getNextBag', () => {

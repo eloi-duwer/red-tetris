@@ -6,7 +6,7 @@
   "scripts": {
     "dev-client": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080",
     "dev-server": "babel-watch src/server/start.js",
-    "build": "NODE_ENV=production webpack --progress --colors",
+    "build": "NODE_ENV=production webpack --mode=production --progress --colors",
     "start": "NODE_ENV=production node src/server/start.js",
     "eslint": "eslint src",
     "test": "NODE_ENV=test mocha --require @babel/register --require ./test/helpers.js --require ./test/dom.js --reporter spec \"src/**/*.test.js\"",

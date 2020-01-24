@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:28:17 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 21:10:55 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 17:06:37 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ const GameSelector = ({ socket, ...props }) => {
           <div>name: {game.name}</div>
           <div>creator: {game.creator}</div>
           <div>Number of players: {game.playerList.length}</div>
+          <div>Game started: {game.gameStarted ? 'Yes' : 'No'}</div>
           <button onClick={() => joinGame(game.id)}>Join</button>
         </div>)}
         <div id='createGame' style={{

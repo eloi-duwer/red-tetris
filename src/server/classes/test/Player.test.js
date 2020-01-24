@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 19:26:19 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 18:03:13 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:23:28 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ describe('Tests for Player and PlayerGenerator', () => {
 	it('generates a player', () => {
 		player = playerGenerator.createPlayer('io', 'socket')
 		expect(playerGenerator.id).to.equal(player.id);
-		expect(player).to.have.all.keys(['id', 'pseudo', 'socket', 'roomId', 'joinedGame']);
+		expect(player).to.have.all.keys(['id', 'pseudo', 'socket', 'roomId', 'joinedGame', 'playing']);
 	});
 
 	it('player can join a game', () => {

@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 00:42:23 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 22:48:03 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 16:51:53 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 export const GameParametrer = ({ gameSpeedRef, nbBlocksRef, ghostDisplayerRef }) => {
-
-  const defaultTxt = 'Ghost displayer';
-  const normalTxt = 'Classic displayer';
 
   const [checked, setChecked] = useState(true);
 
@@ -53,7 +50,7 @@ export const GameParametrer = ({ gameSpeedRef, nbBlocksRef, ghostDisplayerRef })
         onChange={() => setChecked(!checked)}
         ref={ghostDisplayerRef}
         type='checkbox'
-      /><label htmlFor='useGhostDisplayer'>{checked ? defaultTxt : normalTxt}</label>
+      /><label htmlFor='useGhostDisplayer'>{checked ? 'Ghost displayer' : 'Classic displayer'}</label>
 
     </div>
   );

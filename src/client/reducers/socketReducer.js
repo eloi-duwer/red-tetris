@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:48:33 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/17 20:20:44 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 17:23:14 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ import {
 function changeHashGame(game) {
   const args = window.location.href.split('/').slice(-1)[0] || '';
   const oldPseudo = ((args.split('#')[1] || '').split('[')[1] || '').split(']')[0] || '';
-  window.location.replace(`#${ game }${oldPseudo ? `[${ oldPseudo }]` : ''}`);
+  window.location.replace(`#${ game ? game : '' }${oldPseudo ? `[${ oldPseudo }]` : ''}`);
 }
 
 function changeHashPseudo(pseudo) {
@@ -57,6 +57,8 @@ const socketReducer = (state = {}, action) => {
   case SETGAME:
     if (action.game) {
       changeHashGame(action.game.id);
+    } else {
+      changeHashGame(undefined);
     }
     return {
       ...state,
