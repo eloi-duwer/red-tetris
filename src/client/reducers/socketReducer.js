@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:48:33 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/24 17:23:14 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:58:05 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ const socketReducer = (state = {}, action) => {
   case SETGAME:
     if (action.game) {
       changeHashGame(action.game.id);
-    } else {
+    }
+    else {
       changeHashGame(undefined);
     }
     return {

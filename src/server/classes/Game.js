@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 00:15:27 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/24 18:12:54 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:58:54 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ class Game {
         this.playerList[0].socket.emit('newAdmin');
       }
       if (gameManager.io) {
-        if (player.playing)
+        if (player.playing) {
           player.socket.to(player.joinedGame.id).emit('updatePlayer', { id: player.id, gameOver: true });
+        }
       }
     }
   }

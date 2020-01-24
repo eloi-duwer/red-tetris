@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:18:41 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/24 18:12:09 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 19:00:11 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ export default function bindSocketEvents(io, socket, player) {
     if (!player.joinedGame) { return; }
     const firstBag = player.joinedGame.randomPieceGenerator.resetBeforeStart();
     player.joinedGame.gameStarted = true;
-    player.joinedGame.playerList.forEach(player => player.playing = true);
+    player.joinedGame.playerList.forEach(player => { player.playing = true });
     io.in(player.joinedGame.id).emit('startGame', {
       listOfPlayers: player.joinedGame.playerList
         .map(p => p.toSend())
@@ -66,7 +66,7 @@ export default function bindSocketEvents(io, socket, player) {
   socket.on('stopGame', () => {
     if (!player.joinedGame) { return; }
     player.joinedGame.gameStarted = false;
-    player.joinedGame.playerList.forEach(player => player.playing = false);
+    player.joinedGame.playerList.forEach(player => { player.playing = false });
     io.in(player.joinedGame.id).emit('stopGame');
   });
 

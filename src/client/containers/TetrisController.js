@@ -6,7 +6,7 @@
 /*   By: eduwer <eduwer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:21:24 by eduwer            #+#    #+#             */
-/*   Updated: 2020/01/24 18:24:17 by eduwer           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:57:47 by eduwer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ const TetrisController = ({ gameStarted, points, gameWinner, gameOver, ...props 
   }, [gameStarted]);
 
   useEffect(() => {
-    if (gameWinner || gameOver)
+    if (gameWinner || gameOver) {
       stopGame();
+    }
   }, [gameWinner, gameOver]);
 
   return (
